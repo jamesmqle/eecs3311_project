@@ -25,7 +25,7 @@ public class DataFetcherFacade {
         baseURL = url;
     }
 
-    public void getData (String indicator) {
+    public void fetchData (String indicator) {
 
         String startYear = "2010";
         String endYear = "2020";
