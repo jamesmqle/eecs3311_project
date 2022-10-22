@@ -1,4 +1,5 @@
 import DataFetcher.DataFetcherFacade;
+import GUI.GUI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -7,6 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        GUI.getInstance().loginUI();
         DataFetcherFacade.getInstance().setBaseURL("http://api.worldbank.org/v2");
 
         DataFetcherFacade.getInstance().dateRange.setRange("2010", "2020");
