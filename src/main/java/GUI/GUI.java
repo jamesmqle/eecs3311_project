@@ -1,5 +1,6 @@
 package GUI;
 
+import Authentication.AuthenticationFacade;
 import DataFetcher.*;
 
 import javax.swing.*;
@@ -56,9 +57,8 @@ public class GUI {
     public void actionPerformed(ActionEvent e) {
         String user = userText.getText();
         String password = passwordText.getText();
-        System.out.println(user + ", " + password);
 
-        if(user.equals("username") && password.equals("password")){
+        if(AuthenticationFacade.getInstance().authenticate(user,password)){
             success.setText("Login successful!");
         }else {
             success.setText("Login failed!");
