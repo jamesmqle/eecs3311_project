@@ -1,23 +1,13 @@
 import DataFetcher.DataFetcherFacade;
-import GUI.GUI;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        GUI.getInstance().loginUI();
         DataFetcherFacade.getInstance().setBaseURL("http://api.worldbank.org/v2");
 
-        DataFetcherFacade.getInstance().dateRange.setRange("2010", "2020");
-        DataFetcherFacade.getInstance().country.setCountry("usa");
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        for (JsonObject jsonObject: DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL")) { // AG.LND.AGRI.ZS
-            System.out.println(gson.toJson(jsonObject));
-        }
+        DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL");
+        //DataFetcherFacade.getInstance().fetchData("AG.LND.AGRI.ZS");
 
     }
 
