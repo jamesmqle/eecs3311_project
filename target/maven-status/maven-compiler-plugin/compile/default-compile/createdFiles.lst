@@ -1,0 +1,7 @@
+DataFetcher\DataFetcherFacade.class
+Viewer\ViewerFacade.class
+DataFetcher\DataParser.class
+Main.class
+DataFetcher\DataRequester.class
+Authentication\AuthenticationFacade.class
+Analysis\AnalysisFacade.class
