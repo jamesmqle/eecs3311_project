@@ -1,7 +1,5 @@
 package DataFetcher;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 public class DataFetcherFacade {
@@ -11,6 +9,8 @@ public class DataFetcherFacade {
     private DataFetcherFacade() {
         dataRequester = new DataRequester();
         dataParser = new DataParser();
+        dateRange = new DateRange();
+        country = new Country();
     }
     public static DataFetcherFacade getInstance() {
         return dataFetcher;
@@ -18,6 +18,8 @@ public class DataFetcherFacade {
 
     private final DataRequester dataRequester;
     private final DataParser dataParser;
+    public DateRange dateRange;
+    public Country country;
 
     private String baseURL = "";
 
@@ -25,23 +27,14 @@ public class DataFetcherFacade {
         baseURL = url;
     }
 
-    public void fetchData (String indicator) {
+    public JsonObject[] fetchData (String indicator) {
 
-        String startYear = "2010";
-        String endYear = "2020";
-        String country = "can";
-
-        String urlString = baseURL + "/country/" + country + "/indicator/" + indicator + "?date=" + startYear + ":" + endYear + "&format=json";
+        String urlString = baseURL + "/country/" + country.getCountry() + "/indicator/" + indicator + "?date=" + dateRange.getStart() + ":" + dateRange.getEnd() + "&format=json";
         String data = dataRequester.getHTTP(urlString);
 
-        System.out.println("Data Returned: " + data);
+//        System.out.println("Data Returned: " + data);
 
-        JsonObject jsonObjects[] = dataParser.parseData(data);
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        for (JsonObject jsonObject: jsonObjects) {
-            System.out.println(gson.toJson(jsonObject));
-        }
+        return dataParser.parseData(data);
     }
 
 }
