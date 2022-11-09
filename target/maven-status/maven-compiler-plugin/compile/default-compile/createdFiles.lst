@@ -1,0 +1,17 @@
+Analysis\MortalityVSExpenses.class
+DataFetcher\DateRange.class
+GUI\MainUI.class
+GUI\LoginUI$1.class
+Analysis\AnalysisStrategy.class
+DataFetcher\DataFetcherFacade.class
+Viewer\ViewerFacade.class
+DataFetcher\DataParser.class
+Main.class
+DataFetcher\DataRequester.class
+DataFetcher\Filter.class
+Authentication\AuthenticationFacade.class
+DataFetcher\Country.class
+Analysis\Mortality.class
+GUI\GUI.class
+Analysis\AnalysisFacade.class
+GUI\LoginUI.class
