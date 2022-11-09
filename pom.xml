@@ -34,6 +34,12 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.9.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/jfree/jfreechart -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.0</version>
+        </dependency>
     </dependencies>
 
 </project>
