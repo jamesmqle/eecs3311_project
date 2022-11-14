@@ -1,6 +1,7 @@
 Analysis\MortalityVSExpenses.class
 DataFetcher\DateRange.class
 GUI\MainUI.class
+Authentication\DatabaseTable.class
 GUI\LoginUI$1.class
 Analysis\AnalysisStrategy.class
 DataFetcher\DataFetcherFacade.class

@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import javax.swing.*;
 
+import Authentication.DatabaseTable;
 import DataFetcher.DataFetcherFacade;
 import com.google.gson.JsonObject;
 import org.jfree.chart.ChartFactory;
@@ -44,6 +45,8 @@ public class MainUI extends JFrame {
 
     JButton recalculateBtn;
 
+    DatabaseTable countriesDatabase = new DatabaseTable("src/main/resources/database/countries.csv");
+
     public MainUI() {
         super("World Data Analyzer");
 
@@ -54,11 +57,9 @@ public class MainUI extends JFrame {
         // Set top bar
         JLabel chooseCountryLabel = new JLabel("Choose a country: ");
         Vector<String> countriesNames = new Vector<String>();
-        countriesNames.add("USA");
-        countriesNames.add("Canada");
-        countriesNames.add("France");
-        countriesNames.add("China");
-        countriesNames.add("Brazil");
+        for (JsonObject country : countriesDatabase.getData()) {
+            countriesNames.add(country.get("name").getAsString());
+        }
         countriesNames.sort(null);
         JComboBox<String> countriesList = new JComboBox<String>(countriesNames);
 
