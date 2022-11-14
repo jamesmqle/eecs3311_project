@@ -70,15 +70,23 @@ public class MainUI extends JFrame {
         JComboBox<String> toList = new JComboBox<String>(years);
 
         JPanel north = new JPanel();
-        north.add(chooseCountryLabel);
-        north.add(countriesList);
-        north.add(from);
-        north.add(fromList);
-        north.add(to);
-        north.add(toList);
+        north.setLayout(new OverlayLayout(north));
+
+        JPanel northBottom = new JPanel();
+        JPanel northTop = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        northTop.setOpaque(false);
+        northBottom.add(chooseCountryLabel);
+        northBottom.add(countriesList);
+        northBottom.add(from);
+        northBottom.add(fromList);
+        northBottom.add(to);
+        northBottom.add(toList);
 
         // display username
-        userDisplay(north);
+        userDisplay(northTop);
+
+        north.add(northTop);
+        north.add(northBottom);
 
         // Set bottom bar
         recalculateBtn = new JButton("Recalculate");
@@ -131,12 +139,10 @@ public class MainUI extends JFrame {
         getContentPane().add(west, BorderLayout.WEST);
     }
 
-    private void userDisplay(JPanel northEast){
+    public void userDisplay(JPanel north){
         User currentUser = AuthenticationFacade.getInstance().currentUser;
-        JPanel userPanel = new JPanel(new BorderLayout());
         JLabel userLabel = new JLabel("Username: " + currentUser.getUsername());
-        userPanel.add(userLabel);
-        northEast.add(userPanel);
+        north.add(userLabel);
     }
 
     private void createCharts(JPanel west) {
