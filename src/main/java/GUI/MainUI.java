@@ -1,17 +1,14 @@
 package GUI;
 
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Vector;
 
 import javax.swing.*;
 
+import Authentication.AuthenticationFacade;
 import Authentication.DatabaseTable;
+import Authentication.User;
 import DataFetcher.DataFetcherFacade;
 import com.google.gson.JsonObject;
 import org.jfree.chart.ChartFactory;
@@ -80,6 +77,9 @@ public class MainUI extends JFrame {
         north.add(to);
         north.add(toList);
 
+        // display username
+        userDisplay(north);
+
         // Set bottom bar
         recalculateBtn = new JButton("Recalculate");
         recalculateBtn.addActionListener(this::actionPerformed);
@@ -129,6 +129,14 @@ public class MainUI extends JFrame {
         getContentPane().add(east, BorderLayout.EAST);
         getContentPane().add(south, BorderLayout.SOUTH);
         getContentPane().add(west, BorderLayout.WEST);
+    }
+
+    private void userDisplay(JPanel northEast){
+        User currentUser = AuthenticationFacade.getInstance().currentUser;
+        JPanel userPanel = new JPanel(new BorderLayout());
+        JLabel userLabel = new JLabel("Username: " + currentUser.getUsername());
+        userPanel.add(userLabel);
+        northEast.add(userPanel);
     }
 
     private void createCharts(JPanel west) {
