@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import javax.swing.*;
 
+import Analysis.AnalysisFacade;
 import Authentication.DatabaseTable;
 import DataFetcher.DataFetcherFacade;
 import com.google.gson.JsonObject;
@@ -470,11 +471,9 @@ public class MainUI extends JFrame {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == recalculateBtn) {
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            for (JsonObject jsonObject: DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL")) { // AG.LND.AGRI.ZS
-                System.out.println(gson.toJson(jsonObject));
-            }
+            System.out.println("press");
+            AnalysisFacade.getInstance().setAnalysis("SP.POP.TOTL");
+            AnalysisFacade.getInstance().runAnalysis();
         }
     }
 

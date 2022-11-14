@@ -1,5 +1,11 @@
 package Analysis;
 
+import com.google.gson.JsonObject;
+
 public abstract class AnalysisStrategy {
-    public abstract int runAnalysis(int data);
+    protected String dataKey;
+    public AnalysisStrategy(){}
+
+
+    public abstract JsonObject[] runAnalysis();
 }
