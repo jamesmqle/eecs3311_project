@@ -10,6 +10,8 @@ import Authentication.AuthenticationFacade;
 import Authentication.DatabaseTable;
 import Authentication.User;
 import DataFetcher.DataFetcherFacade;
+import GUI.UIElements.CustomButton;
+import GUI.UIElements.CustomComboBox;
 import com.google.gson.JsonObject;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -58,7 +60,7 @@ public class MainUI extends JFrame {
             countriesNames.add(country.get("name").getAsString());
         }
         countriesNames.sort(null);
-        JComboBox<String> countriesList = new JComboBox<String>(countriesNames);
+        CustomComboBox<String> countriesList = new CustomComboBox<String>(countriesNames);
 
         JLabel from = new JLabel("From");
         JLabel to = new JLabel("To");
@@ -66,8 +68,8 @@ public class MainUI extends JFrame {
         for (int i = 2021; i >= 2010; i--) {
             years.add("" + i);
         }
-        JComboBox<String> fromList = new JComboBox<String>(years);
-        JComboBox<String> toList = new JComboBox<String>(years);
+        CustomComboBox<String> fromList = new CustomComboBox<String>(years);
+        CustomComboBox<String> toList = new CustomComboBox<String>(years);
 
         JPanel north = new JPanel();
         north.setLayout(new OverlayLayout(north));
@@ -89,7 +91,7 @@ public class MainUI extends JFrame {
         north.add(northBottom);
 
         // Set bottom bar
-        recalculateBtn = new JButton("Recalculate");
+        recalculateBtn = new CustomButton("Recalculate");
         recalculateBtn.addActionListener(this::actionPerformed);
 
         JLabel viewsLabel = new JLabel("Available Views: ");
@@ -100,9 +102,13 @@ public class MainUI extends JFrame {
         viewsNames.add("Bar Chart");
         viewsNames.add("Scatter Chart");
         viewsNames.add("Report");
-        JComboBox<String> viewsList = new JComboBox<String>(viewsNames);
-        JButton addView = new JButton("+");
-        JButton removeView = new JButton("-");
+        CustomComboBox<String> viewsList = new CustomComboBox<String>(viewsNames);
+        Image plusImage = new ImageIcon("src/main/resources/plus.png").getImage();
+        JButton addView = new CustomButton(new ImageIcon(plusImage.getScaledInstance(10,10,java.awt.Image.SCALE_SMOOTH)));
+        addView.setPreferredSize(new Dimension(25, 25));
+        Image minusImage = new ImageIcon("src/main/resources/minus.png").getImage();
+        JButton removeView = new CustomButton(new ImageIcon(minusImage.getScaledInstance(10,10,java.awt.Image.SCALE_SMOOTH)));
+        removeView.setPreferredSize(new Dimension(25, 25));
 
         JLabel methodLabel = new JLabel("        Choose analysis method: ");
 
@@ -114,7 +120,7 @@ public class MainUI extends JFrame {
         methodsNames.add("Unemployment vs GDP");
         methodsNames.add("Unemployment");
 
-        JComboBox<String> methodsList = new JComboBox<String>(methodsNames);
+        CustomComboBox<String> methodsList = new CustomComboBox<String>(methodsNames);
 
         JPanel south = new JPanel();
         south.add(viewsLabel);
@@ -130,6 +136,7 @@ public class MainUI extends JFrame {
 
         // Set charts region
         JPanel west = new JPanel();
+        west.setSize(1250, 700);
         west.setLayout(new GridLayout(2, 0));
         createCharts(west);
 
