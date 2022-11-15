@@ -18,8 +18,8 @@ public class GUI {
     public void mainUI() {
         mainFrame = new MainUI();
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setSize(900, 600);
-        mainFrame.pack();
+        mainFrame.setSize(1250, 800);
+        //mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
     }
