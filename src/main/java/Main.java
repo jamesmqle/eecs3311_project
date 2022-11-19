@@ -5,8 +5,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Testing for initial UI & Authentication modules
+        // Open initial login UI
         GUI.getInstance().loginUI();
+
+        // Bypass login
+        // IMPORTANT: Comment out before pushing
+        // AuthenticationFacade.getInstance().authenticate("zach","1234");
+        // GUI.getInstance().mainUI();
 
         // Testing for initial Data Fetcher module
         DataFetcherFacade.getInstance().setBaseURL("http://api.worldbank.org/v2");
