@@ -4,7 +4,6 @@ import Authentication.AuthenticationFacade;
 import GUI.UIElements.CustomButton;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Timer;
 import java.util.TimerTask;

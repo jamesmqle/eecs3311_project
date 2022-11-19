@@ -4,8 +4,8 @@ import javax.swing.*;
 
 public class GUI {
 
-    JFrame loginFrame;
-    JFrame mainFrame;
+    public LoginUI loginFrame;
+    public MainUI mainFrame;
 
     private static final GUI gui = new GUI();
     private GUI() {
@@ -35,5 +35,9 @@ public class GUI {
     public void closeLoginUI() {
         loginFrame.setVisible(false);
         loginFrame.dispose();
+    }
+
+    public void refreshMainUI() {
+        mainFrame.validate();
     }
 }
