@@ -2,6 +2,10 @@ package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.security.KeyPair;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -20,13 +24,17 @@ import com.google.gson.GsonBuilder;
 
 public class MainUI extends JFrame {
 
+    JPanel viewerPanel;
+
     JButton recalculateBtn;
     JButton addViewBtn;
     JButton removeViewBtn;
 
-    JPanel viewerPanel;
-
     CustomComboBox<String> viewsList;
+    CustomComboBox<String> countriesList;
+    Map<String, String> countriesNames;
+    CustomComboBox<String> fromList;
+    CustomComboBox<String> toList;
 
     DatabaseTable countriesDatabase = new DatabaseTable("src/main/resources/database/countries.csv");
 
@@ -39,21 +47,21 @@ public class MainUI extends JFrame {
 
         // Set top bar
         JLabel chooseCountryLabel = new JLabel("Choose a country: ");
-        Vector<String> countriesNames = new Vector<String>();
+        countriesNames = new TreeMap<>();
         for (JsonObject country : countriesDatabase.getData()) {
-            countriesNames.add(country.get("name").getAsString());
+            countriesNames.put(country.get("name").getAsString(), country.get("key").getAsString());
         }
-        countriesNames.sort(null);
-        CustomComboBox<String> countriesList = new CustomComboBox<String>(countriesNames);
+        countriesList = new CustomComboBox<>(new Vector(countriesNames.keySet()));
+        countriesList.addActionListener(this::actionPerformed);
 
         JLabel from = new JLabel("From");
         JLabel to = new JLabel("To");
-        Vector<String> years = new Vector<String>();
+        Vector<String> years = new Vector<>();
         for (int i = 2021; i >= 2010; i--) {
             years.add("" + i);
         }
-        CustomComboBox<String> fromList = new CustomComboBox<String>(years);
-        CustomComboBox<String> toList = new CustomComboBox<String>(years);
+        fromList = new CustomComboBox<>(years);
+        toList = new CustomComboBox<>(years);
 
         JPanel north = new JPanel();
         north.setLayout(new OverlayLayout(north));
@@ -149,9 +157,24 @@ public class MainUI extends JFrame {
         GUI.getInstance().refreshMainUI();
     }
 
+    public String getFromYear() {
+        return fromList.getSelectedItem().toString();
+    }
+
+    public String getToYear() {
+        return toList.getSelectedItem().toString();
+    }
+
+    public String getCountry() {
+        return countriesNames.get(countriesList.getSelectedItem().toString());
+    }
+
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == recalculateBtn) {
+
+            DataFetcherFacade.getInstance().dateRange.setRange(getFromYear(), getToYear());
+            DataFetcherFacade.getInstance().country.setCountry(getCountry());
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             for (JsonObject jsonObject: DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL")) { // AG.LND.AGRI.ZS
@@ -161,6 +184,8 @@ public class MainUI extends JFrame {
             ViewerFacade.getInstance().addViewer(viewsList.getSelectedItem().toString());
         } else if (e.getSource() == removeViewBtn) {
             ViewerFacade.getInstance().removeViewer(viewsList.getSelectedItem().toString());
+        } else if (e.getSource() ==  fromList) {
+        } else if (e.getSource() ==  toList) {
         }
     }
 

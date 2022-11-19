@@ -32,8 +32,6 @@ public class DataFetcherFacade {
         String urlString = baseURL + "/country/" + country.getCountry() + "/indicator/" + indicator + "?date=" + dateRange.getStart() + ":" + dateRange.getEnd() + "&format=json";
         String data = dataRequester.getHTTP(urlString);
 
-//        System.out.println("Data Returned: " + data);
-
         return dataParser.parseData(data);
     }
 
