@@ -1,5 +1,9 @@
 package GUI;
 
+import GUI.Themes.Theme;
+import GUI.Themes.LightTheme;
+import Viewer.ViewerFacade;
+
 import javax.swing.*;
 
 public class GUI {
@@ -9,17 +13,18 @@ public class GUI {
 
     private static final GUI gui = new GUI();
     private GUI() {
-
+        theme.setTheme(new LightTheme());
     }
     public static GUI getInstance() {
         return gui;
     }
 
+    public Theme theme = new Theme();
+
     public void mainUI() {
         mainFrame = new MainUI();
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(1250, 800);
-        //mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
     }
@@ -38,6 +43,16 @@ public class GUI {
     }
 
     public void refreshMainUI() {
-        mainFrame.validate();
+        mainFrame.revalidate();
+        mainFrame.repaint();
+    }
+
+    public void rebuildMainUI() {
+        mainFrame.getContentPane().removeAll();
+        mainFrame.BuildUI();
+
+        ViewerFacade.getInstance().refreshViewers();
+
+        refreshMainUI();
     }
 }

@@ -1,4 +1,4 @@
-package Viewer;
+package Viewer.Viewers;
 
 import GUI.GUI;
 import org.jfree.chart.ChartPanel;
@@ -88,7 +88,7 @@ public class BarChart extends Viewer {
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(400, 300));
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        chartPanel.setBackground(Color.white);
+        chartPanel.setBackground(GUI.getInstance().theme.getBorderColor());
 
         return chartPanel;
     }

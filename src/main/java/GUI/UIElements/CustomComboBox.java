@@ -1,4 +1,5 @@
 package GUI.UIElements;
+import GUI.GUI;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
@@ -10,19 +11,17 @@ import java.util.Vector;
 
 public class CustomComboBox<E> extends JComboBox {
 
-    private Color mainColor = new Color(22, 168, 247);
-    private Color borderColor = Color.WHITE;
-
     public CustomComboBox (Vector<E> items) {
         super(items);
 
         this.setMaximumRowCount(20);
 
-        this.setBackground(Color.white);
+        this.setBackground(GUI.getInstance().theme.getBorderColor());
+        this.setForeground(GUI.getInstance().theme.getText2Color());
 
         this.setOpaque(true);
         this.setFocusable(false);
-        this.setBorder(BorderFactory.createLineBorder(borderColor, 5));
+        this.setBorder(BorderFactory.createLineBorder(GUI.getInstance().theme.getBorderColor(), 5));
 
         var combo = this;
         this.setUI(new BasicComboBoxUI() {
@@ -30,13 +29,13 @@ public class CustomComboBox<E> extends JComboBox {
             protected ComboPopup createPopup() {
                 return new BasicComboPopup(combo) {
                     {
-                        this.setBorder(BorderFactory.createLineBorder(borderColor, 2));
+                        this.setBorder(BorderFactory.createLineBorder(GUI.getInstance().theme.getBorderColor(), 2));
                     }
                 };
             }
             @Override
             protected JButton createArrowButton() {
-                BasicArrowButton result = new BasicArrowButton(BasicArrowButton.SOUTH, mainColor, mainColor, Color.WHITE, mainColor);
+                BasicArrowButton result = new BasicArrowButton(BasicArrowButton.SOUTH, GUI.getInstance().theme.getMainColor(), GUI.getInstance().theme.getMainColor(), GUI.getInstance().theme.getText1Color(), GUI.getInstance().theme.getMainColor());
                 result.setOpaque(true);
                 return result;
             }
@@ -48,8 +47,8 @@ public class CustomComboBox<E> extends JComboBox {
                                                           boolean isSelected, boolean cellHasFocus) {
                 JLabel result = new JLabel(value);
                 result.setOpaque(true);
-                result.setBackground(isSelected ? mainColor : Color.WHITE);
-                result.setForeground(isSelected ? Color.WHITE : Color.BLACK);
+                result.setBackground(isSelected ? GUI.getInstance().theme.getMainColor() : GUI.getInstance().theme.getBorderColor());
+                result.setForeground(isSelected ? GUI.getInstance().theme.getText1Color() : GUI.getInstance().theme.getText2Color());
                 return result;
             }
         });

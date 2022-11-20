@@ -1,4 +1,4 @@
-package Viewer;
+package Viewer.Viewers;
 
 import GUI.GUI;
 
@@ -34,6 +34,7 @@ public class Report extends Viewer {
         report.setText(reportMessage);
         JScrollPane outputScrollPane = new JScrollPane(report);
         JPanel outputPanel = new JPanel();
+        outputPanel.setBackground(GUI.getInstance().theme.getBorderColor());
         outputPanel.add(outputScrollPane);
 
         return outputPanel;

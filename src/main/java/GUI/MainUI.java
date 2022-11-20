@@ -2,11 +2,8 @@ package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.security.KeyPair;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Vector;
+import java.util.*;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -29,6 +26,7 @@ public class MainUI extends JFrame {
     JButton recalculateBtn;
     JButton addViewBtn;
     JButton removeViewBtn;
+    JButton themeSwitch;
 
     CustomComboBox<String> viewsList;
     CustomComboBox<String> countriesList;
@@ -45,8 +43,14 @@ public class MainUI extends JFrame {
         ImageIcon iconImg = new ImageIcon(path);
         super.setIconImage(iconImg.getImage());
 
+        BuildUI();
+    }
+
+    public void BuildUI() {
+
         // Set top bar
         JLabel chooseCountryLabel = new JLabel("Choose a country: ");
+        chooseCountryLabel.setForeground(GUI.getInstance().theme.getText2Color());
         countriesNames = new TreeMap<>();
         for (JsonObject country : countriesDatabase.getData()) {
             countriesNames.put(country.get("name").getAsString(), country.get("key").getAsString());
@@ -55,7 +59,9 @@ public class MainUI extends JFrame {
         countriesList.addActionListener(this::actionPerformed);
 
         JLabel from = new JLabel("From");
+        from.setForeground(GUI.getInstance().theme.getText2Color());
         JLabel to = new JLabel("To");
+        to.setForeground(GUI.getInstance().theme.getText2Color());
         Vector<String> years = new Vector<>();
         for (int i = 2021; i >= 2010; i--) {
             years.add("" + i);
@@ -64,11 +70,20 @@ public class MainUI extends JFrame {
         toList = new CustomComboBox<>(years);
 
         JPanel north = new JPanel();
+        north.setBackground(GUI.getInstance().theme.getBackgroundColor());
         north.setLayout(new OverlayLayout(north));
 
         JPanel northBottom = new JPanel();
-        JPanel northTop = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        northTop.setOpaque(false);
+        northBottom.setBackground(GUI.getInstance().theme.getBackgroundColor());
+
+        JPanel northTopRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        northTopRight.setBackground(GUI.getInstance().theme.getBackgroundColor());
+        northTopRight.setOpaque(false);
+
+        JPanel northTopLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        northTopLeft.setBackground(GUI.getInstance().theme.getBackgroundColor());
+        northTopLeft.setOpaque(false);
+
         northBottom.add(chooseCountryLabel);
         northBottom.add(countriesList);
         northBottom.add(from);
@@ -76,10 +91,14 @@ public class MainUI extends JFrame {
         northBottom.add(to);
         northBottom.add(toList);
 
-        // display username
-        userDisplay(northTop);
+        // Theme switch
+        themeSwitch(northTopLeft);
 
-        north.add(northTop);
+        // Display username
+        userDisplay(northTopRight);
+
+        north.add(northTopRight);
+        north.add(northTopLeft);
         north.add(northBottom);
 
         // Set bottom bar
@@ -87,6 +106,7 @@ public class MainUI extends JFrame {
         recalculateBtn.addActionListener(this::actionPerformed);
 
         JLabel viewsLabel = new JLabel("Available Views: ");
+        viewsLabel.setForeground(GUI.getInstance().theme.getText2Color());
 
         Vector<String> viewsNames = new Vector<String>();
         viewsNames.add("Pie Chart");
@@ -106,6 +126,7 @@ public class MainUI extends JFrame {
         removeViewBtn.addActionListener(this::actionPerformed);
 
         JLabel methodLabel = new JLabel("        Choose analysis method: ");
+        methodLabel.setForeground(GUI.getInstance().theme.getText2Color());
 
         Vector<String> methodsNames = new Vector<String>();
         methodsNames.add("Total Population");
@@ -119,6 +140,7 @@ public class MainUI extends JFrame {
         CustomComboBox<String> methodsList = new CustomComboBox<String>(methodsNames);
 
         JPanel south = new JPanel();
+        south.setBackground(GUI.getInstance().theme.getBackgroundColor());
         south.add(viewsLabel);
         south.add(viewsList);
         south.add(addViewBtn);
@@ -128,15 +150,14 @@ public class MainUI extends JFrame {
         south.add(methodsList);
         south.add(recalculateBtn);
 
-        JPanel east = new JPanel();
-
         // Set charts region
         viewerPanel = new JPanel();
+        viewerPanel.setBackground(GUI.getInstance().theme.getBackgroundColor());
         viewerPanel.setSize(1250, 700);
         viewerPanel.setLayout(new GridLayout(2, 0));
 
+        getContentPane().setBackground(GUI.getInstance().theme.getBackgroundColor());
         getContentPane().add(north, BorderLayout.NORTH);
-        getContentPane().add(east, BorderLayout.EAST);
         getContentPane().add(south, BorderLayout.SOUTH);
         getContentPane().add(viewerPanel, BorderLayout.WEST);
     }
@@ -144,7 +165,27 @@ public class MainUI extends JFrame {
     public void userDisplay(JPanel north){
         User currentUser = AuthenticationFacade.getInstance().currentUser;
         JLabel userLabel = new JLabel("Username: " + currentUser.getUsername());
+        userLabel.setForeground(GUI.getInstance().theme.getText2Color());
         north.add(userLabel);
+    }
+
+    public void themeSwitch(JPanel north){
+        JLabel userLabel = new JLabel("Theme: ");
+        userLabel.setForeground(GUI.getInstance().theme.getText2Color());
+        Image themeImage = new ImageIcon("src/main/resources/refresh.png").getImage();
+        themeSwitch = new CustomButton(new ImageIcon(themeImage.getScaledInstance(10,10,java.awt.Image.SCALE_SMOOTH)));
+        themeSwitch.setPreferredSize(new Dimension(25, 25));
+        themeSwitch.addActionListener(this::actionPerformed);
+        north.add(userLabel);
+        north.add(themeSwitch);
+    }
+
+    public void addViewers (List<JPanel> viewers) {
+        viewerPanel.removeAll();
+        for (JPanel viewer: viewers) {
+            viewerPanel.add(viewer);
+        }
+        GUI.getInstance().refreshMainUI();
     }
 
     public void addViewer(JPanel viewer) {
@@ -186,6 +227,8 @@ public class MainUI extends JFrame {
             ViewerFacade.getInstance().removeViewer(viewsList.getSelectedItem().toString());
         } else if (e.getSource() ==  fromList) {
         } else if (e.getSource() ==  toList) {
+        } else if (e.getSource() == themeSwitch) {
+            GUI.getInstance().theme.toggleTheme();
         }
     }
 

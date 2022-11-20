@@ -1,7 +1,10 @@
 package Viewer;
 
-import java.util.HashMap;
-import java.util.Map;
+import GUI.GUI;
+import Viewer.Viewers.*;
+
+import javax.swing.*;
+import java.util.*;
 
 public class ViewerFacade {
 
@@ -14,7 +17,7 @@ public class ViewerFacade {
 
     private final ViewerFactory viewerFactory = new ViewerFactory();
 
-    private Map<String, Viewer> currentViewers = new HashMap<>();
+    private Map<String, Viewer> currentViewers = new LinkedHashMap<>();
 
     public void addViewer(String type) {
         type = type.replaceAll(" ", "");
@@ -40,6 +43,17 @@ public class ViewerFacade {
         removeViewer.remove();
 
         currentViewers.remove(type);
+    }
+
+    public void refreshViewers() {
+        List<JPanel> viewerPanels = new ArrayList<>();
+        for (String viewerType: currentViewers.keySet()) {
+            Viewer refreshedViewer = viewerFactory.buildViewer(viewerType);
+            currentViewers.put(viewerType, refreshedViewer);
+            viewerPanels.add(refreshedViewer.viewerPanel);
+        }
+
+        GUI.getInstance().mainFrame.addViewers(viewerPanels);
     }
 
 }
