@@ -1,4 +1,4 @@
-package Viewer;
+package Viewer.Viewers;
 
 import GUI.GUI;
 
@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public abstract class Viewer {
 
-    JPanel viewerPanel;
+    public JPanel viewerPanel;
 
     public Viewer () {}
 
