@@ -1,6 +1,7 @@
 package GUI;
 
 import Authentication.AuthenticationFacade;
+import GUI.UIElements.CustomButton;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,34 +22,33 @@ public class LoginUI extends JFrame {
         super.setIconImage(iconImg.getImage());
 
         JPanel panel = new JPanel();
-        panel.setSize(300,200);
 
         super.add(panel);
         panel.setLayout(null);
 
         JLabel userLabel = new JLabel("Username:");
-        userLabel.setBounds(10,20,80,25);
+        userLabel.setBounds(10,10,80,25);
         panel.add(userLabel);
 
         userText = new JTextField();
-        userText.setBounds(100,20,165,25);
+        userText.setBounds(100,10,165,25);
         panel.add(userText);
 
         JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(10,50,80,25);
+        passwordLabel.setBounds(10,40,80,25);
         panel.add(passwordLabel);
 
         passwordText = new JPasswordField();
-        passwordText.setBounds(100,50,165,25);
+        passwordText.setBounds(100,40,165,25);
         panel.add(passwordText);
 
-        JButton button = new JButton("Submit!");
-        button.setBounds(10,80,80,25);
+        JButton button = new CustomButton("Submit");
+        button.setBounds(10,75,100,25);
         button.addActionListener(this::actionPerformed);
         panel.add(button);
 
         success = new JLabel("");
-        success.setBounds(10,110,300,25);
+        success.setBounds(120,75,100,25);
         panel.add(success);
     }
 
