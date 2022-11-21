@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import Analysis.AnalysisFacade;
 import Authentication.AuthenticationFacade;
 import Authentication.DatabaseTable;
 import Authentication.User;
@@ -33,6 +34,7 @@ public class MainUI extends JFrame {
     Map<String, String> countriesNames;
     CustomComboBox<String> fromList;
     CustomComboBox<String> toList;
+    CustomComboBox<String> methodsList;
 
     DatabaseTable countriesDatabase = new DatabaseTable("src/main/resources/database/countries.csv");
 
@@ -129,15 +131,9 @@ public class MainUI extends JFrame {
         methodLabel.setForeground(GUI.getInstance().theme.getText2Color());
 
         Vector<String> methodsNames = new Vector<String>();
-        methodsNames.add("Total Population");
-        methodsNames.add("Mortality");
-        methodsNames.add("Mortality vs Expenses");
-        methodsNames.add("Mortality vs Expenses & Hospital Beds");
-        methodsNames.add("Mortality vs GDP");
-        methodsNames.add("Unemployment vs GDP");
-        methodsNames.add("Unemployment");
+        methodsNames.add("CO2 vs Energy Use vs Air Pollution");
 
-        CustomComboBox<String> methodsList = new CustomComboBox<String>(methodsNames);
+        methodsList = new CustomComboBox<String>(methodsNames);
 
         JPanel south = new JPanel();
         south.setBackground(GUI.getInstance().theme.getBackgroundColor());
@@ -213,14 +209,10 @@ public class MainUI extends JFrame {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == recalculateBtn) {
+            AnalysisFacade.getInstance().setAnalysis(methodsList.getSelectedItem().toString());
 
-            DataFetcherFacade.getInstance().dateRange.setRange(getFromYear(), getToYear());
-            DataFetcherFacade.getInstance().country.setCountry(getCountry());
+            AnalysisFacade.getInstance().runAnalysis();
 
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            for (JsonObject jsonObject: DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL")) { // AG.LND.AGRI.ZS
-                System.out.println(gson.toJson(jsonObject));
-            }
         } else if (e.getSource() == addViewBtn) {
             ViewerFacade.getInstance().addViewer(viewsList.getSelectedItem().toString());
         } else if (e.getSource() == removeViewBtn) {

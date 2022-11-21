@@ -57,7 +57,7 @@ public class LoginUI extends JFrame {
         String password = new String(passwordText.getPassword());
 
         if(AuthenticationFacade.getInstance().authenticate(user,password)){
-            success.setText("Login successful!");
+            success.setText("Successful!");
 
             new Timer().schedule(new TimerTask() {
                 @Override

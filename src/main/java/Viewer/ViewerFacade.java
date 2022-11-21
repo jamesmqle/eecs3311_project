@@ -28,6 +28,7 @@ public class ViewerFacade {
 
         Viewer newViewer = viewerFactory.buildViewer(type);
         currentViewers.put(type, newViewer);
+        newViewer.add();
 
         //ToDo: Need to tell the viewer to observe the current analysis
     }

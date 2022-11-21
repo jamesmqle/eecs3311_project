@@ -1,6 +1,7 @@
 package Viewer.Viewers;
 
 import GUI.GUI;
+import com.google.gson.JsonObject;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
@@ -18,7 +19,8 @@ import java.awt.*;
 public class ScatterChart extends Viewer {
 
     public ScatterChart () {
-        viewerPanel = createScatter();
+        super();
+        viewerPanel.add(createScatter());
         GUI.getInstance().mainFrame.addViewer(viewerPanel);
     }
 
@@ -89,4 +91,6 @@ public class ScatterChart extends Viewer {
 
         return chartPanel;
     }
+
+    public void update(JsonObject[][] analyzedData){}
 }

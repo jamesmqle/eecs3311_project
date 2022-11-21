@@ -1,8 +1,10 @@
 package Analysis;
 
+import com.google.gson.JsonObject;
+
 public class MortalityVSExpenses extends AnalysisStrategy{
     @Override
-    public int runAnalysis(int data){
-        return data*2;
+    public JsonObject[][] runAnalysis(){
+        return null;
     }
 }
