@@ -1,6 +1,7 @@
 package Viewer.Viewers;
 
 import GUI.GUI;
+import com.google.gson.JsonObject;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
@@ -87,4 +88,6 @@ public class TimeSeries extends Viewer {
 
         return chartPanel;
     }
+
+    public void update(JsonObject[][] analyzedData){}
 }

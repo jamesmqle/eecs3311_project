@@ -129,13 +129,7 @@ public class MainUI extends JFrame {
         methodLabel.setForeground(GUI.getInstance().theme.getText2Color());
 
         Vector<String> methodsNames = new Vector<String>();
-        methodsNames.add("Total Population");
-        methodsNames.add("Mortality");
-        methodsNames.add("Mortality vs Expenses");
-        methodsNames.add("Mortality vs Expenses & Hospital Beds");
-        methodsNames.add("Mortality vs GDP");
-        methodsNames.add("Unemployment vs GDP");
-        methodsNames.add("Unemployment");
+        methodsNames.add("CO2 vs Energy Use vs Air Pollution");
 
         CustomComboBox<String> methodsList = new CustomComboBox<String>(methodsNames);
 

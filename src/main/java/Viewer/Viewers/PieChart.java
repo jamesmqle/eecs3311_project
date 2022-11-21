@@ -1,6 +1,7 @@
 package Viewer.Viewers;
 
 import GUI.GUI;
+import com.google.gson.JsonObject;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -43,4 +44,6 @@ public class PieChart extends Viewer {
 
         return chartPanel;
     }
+
+    public void update(JsonObject[][] analyzedData){}
 }

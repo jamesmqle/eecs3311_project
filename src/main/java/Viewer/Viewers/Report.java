@@ -1,6 +1,7 @@
 package Viewer.Viewers;
 
 import GUI.GUI;
+import com.google.gson.JsonObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,4 +40,6 @@ public class Report extends Viewer {
 
         return outputPanel;
     }
+
+    public void update(JsonObject[][] analyzedData){}
 }

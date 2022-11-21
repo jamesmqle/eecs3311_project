@@ -1,6 +1,9 @@
 package Viewer.Viewers;
 
 import GUI.GUI;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -93,4 +96,17 @@ public class BarChart extends Viewer {
         return chartPanel;
     }
 
+    public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel){
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//
+//        for (JsonObject[] jsonObjects: analyzedData) {
+//            for (JsonObject jsonObject: jsonObjects) {
+//                System.out.println(gson.toJson(jsonObject));
+//            }
+//        }
+
+        viewerPanel.removeAll();
+        viewerPanel.add(createBar(analyzedData, title, xAxisLabel, yAxisLabel));
+        GUI.getInstance().refreshMainUI();
+    }
 }

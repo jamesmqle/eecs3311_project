@@ -1,6 +1,9 @@
 package Viewer.Viewers;
 
 import GUI.GUI;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -9,6 +12,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -90,5 +94,12 @@ public class LineChart extends Viewer {
         chartPanel.setBackground(GUI.getInstance().theme.getBorderColor());
 
         return chartPanel;
+    }
+
+    public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel){
+
+        viewerPanel.removeAll();
+        viewerPanel.add(createLine(analyzedData, title, xAxisLabel, yAxisLabel));
+        GUI.getInstance().refreshMainUI();
     }
 }

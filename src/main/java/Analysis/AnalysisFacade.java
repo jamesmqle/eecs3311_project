@@ -14,8 +14,8 @@ public class AnalysisFacade {
 
     public void setAnalysis(String code){
         switch(code) {
-            case "SP.POP.TOTL":
-                analysisStrategy = new Mortality();
+            case "CO2vsEnergyUsevsAirPollution":
+                analysisStrategy = new CO2vsEnergyUsevsAirPollution();
                 break;
             default:
                 // code block
