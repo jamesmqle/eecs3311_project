@@ -17,7 +17,8 @@ import java.awt.*;
 public class TimeSeries extends Viewer {
 
     public TimeSeries () {
-        viewerPanel = createTimeSeries();
+        super();
+        viewerPanel.add(createTimeSeries());
         GUI.getInstance().mainFrame.addViewer(viewerPanel);
     }
 

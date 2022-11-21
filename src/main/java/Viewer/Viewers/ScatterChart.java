@@ -19,7 +19,8 @@ import java.awt.*;
 public class ScatterChart extends Viewer {
 
     public ScatterChart () {
-        viewerPanel = createScatter();
+        super();
+        viewerPanel.add(createScatter());
         GUI.getInstance().mainFrame.addViewer(viewerPanel);
     }
 

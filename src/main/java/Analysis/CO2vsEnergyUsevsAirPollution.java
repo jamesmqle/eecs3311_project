@@ -1,9 +1,15 @@
 package Analysis;
 
+import GUI.GUI;
 import DataFetcher.DataFetcherFacade;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.jfree.data.json.impl.JSONValue;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 //Sample Analysis
 public class CO2vsEnergyUsevsAirPollution extends AnalysisStrategy {
@@ -24,6 +30,7 @@ public class CO2vsEnergyUsevsAirPollution extends AnalysisStrategy {
         yAxisLabel = "Percentage Change (%)";
 
     }
+
     @Override
     public JsonObject[][] runAnalysis() {
         System.out.println("CO2vsEnergyUsevsAirPollution");
@@ -43,4 +50,31 @@ public class CO2vsEnergyUsevsAirPollution extends AnalysisStrategy {
 
         return analyzedData;
     }
+
+    private JsonObject[] annualPercentageChange (JsonObject[] data) {
+        double past = -1;
+        for (JsonObject jsonObject: data) {
+
+            // Calculate annual percentage change > Replace the value
+            JsonElement nowElement = jsonObject.get("value");
+            if(!nowElement.isJsonNull()) {
+                double now = nowElement.getAsDouble();
+
+                if(past != -1) {
+                    double newValue = ((now - past) / past) * 100;      // Formula - annual percentage change
+                    jsonObject.addProperty("value", newValue);
+                }
+
+                past = now;
+            } else {
+                jsonObject.addProperty("value", 0);
+            }
+
+        }
+        //Remove the oldest year
+        data = Arrays.copyOfRange(data, 1, data.length);
+
+        return data;
+    }
+
 }

@@ -9,7 +9,8 @@ import java.awt.*;
 public class Report extends Viewer {
 
     public Report () {
-        viewerPanel = createReport();
+        super();
+        viewerPanel.add(createReport());
         GUI.getInstance().mainFrame.addViewer(viewerPanel);
     }
 

@@ -14,7 +14,8 @@ import java.awt.*;
 public class PieChart extends Viewer {
 
     public PieChart () {
-        viewerPanel = createPie();
+        super();
+        viewerPanel.add(createPie());
         GUI.getInstance().mainFrame.addViewer(viewerPanel);
     }
 
