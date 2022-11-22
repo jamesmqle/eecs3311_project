@@ -24,19 +24,15 @@ public class LineChart extends Viewer {
     public LineChart () {
         super();
         viewerPanel.add(createLine(new JsonObject[0][0], "", "", ""));
-        GUI.getInstance().mainFrame.addViewer(viewerPanel);
     }
 
     private JPanel createLine(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
         XYSeriesCollection dataset = new XYSeriesCollection();
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         for (JsonObject[] jsonObjects: analyzedData) {
             XYSeries series = null;
 
             for (JsonObject jsonObject: jsonObjects) {
-                System.out.println(gson.toJson(jsonObject));
-
                 if(series == null)
                     series = new XYSeries(((JsonObject) jsonObject.get("indicator")).get("value").getAsString());
 
@@ -103,7 +99,8 @@ public class LineChart extends Viewer {
 
         chart.getLegend().setFrame(BlockBorder.NONE);
 
-        chart.setTitle(new TextTitle(title, new Font("Arial", java.awt.Font.BOLD, 18)));
+        String fontName = javax.swing.UIManager.getDefaults().getFont("Label.font").getFontName();
+        chart.setTitle(new TextTitle(title, new Font(fontName, java.awt.Font.BOLD, 18)));
 
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(400, 300));
@@ -113,10 +110,8 @@ public class LineChart extends Viewer {
         return chartPanel;
     }
 
-    public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel){
-
+    public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
         viewerPanel.removeAll();
         viewerPanel.add(createLine(analyzedData, title, xAxisLabel, yAxisLabel));
-        GUI.getInstance().refreshMainUI();
     }
 }

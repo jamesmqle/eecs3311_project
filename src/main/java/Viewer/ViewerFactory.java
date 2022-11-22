@@ -13,7 +13,7 @@ public class ViewerFactory {
             case "ScatterChart" -> new ScatterChart();
             case "Report" -> new Report();
             case "PieChart" -> new PieChart();
-            case "TimeSeries" -> new TimeSeries();
+            case "TimeSeries" -> new TimeSeriesChart();
             default -> null;
         };
     }

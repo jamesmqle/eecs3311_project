@@ -7,8 +7,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.Year;
@@ -16,14 +15,14 @@ import org.jfree.data.time.Year;
 import javax.swing.*;
 import java.awt.*;
 
-public class ScatterChart extends Viewer {
+public class TimeSeriesChart extends Viewer {
 
-    public ScatterChart () {
+    public TimeSeriesChart() {
         super();
-        viewerPanel.add(createScatter(new JsonObject[0][0], "", "", ""));
+        viewerPanel.add(createTimeSeries(new JsonObject[0][0], "", "", ""));
     }
 
-    private JPanel createScatter(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
+    private JPanel createTimeSeries(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
         TimeSeriesCollection dataset = new TimeSeriesCollection();
 
         for (JsonObject[] jsonObjects: analyzedData) {
@@ -39,7 +38,7 @@ public class ScatterChart extends Viewer {
             dataset.addSeries(series);
         }
 
-//        TimeSeries series1 = new TimeSeries("Mortality/1000 births");
+//        org.jfree.data.time.TimeSeries series1 = new org.jfree.data.time.TimeSeries("Mortality/1000 births");
 //        series1.add(new Year(2018), 5.6);
 //        series1.add(new Year(2017), 5.7);
 //        series1.add(new Year(2016), 5.8);
@@ -50,7 +49,7 @@ public class ScatterChart extends Viewer {
 //        series1.add(new Year(2011), 6.2);
 //        series1.add(new Year(2010), 6.4);
 //
-//        TimeSeries series2 = new TimeSeries("Health Expenditure per Capita");
+//        org.jfree.data.time.TimeSeries series2 = new org.jfree.data.time.TimeSeries("Health Expenditure per Capita");
 //        series2.add(new Year(2018), 10624);
 //        series2.add(new Year(2017), 10209);
 //        series2.add(new Year(2016), 9877);
@@ -63,7 +62,7 @@ public class ScatterChart extends Viewer {
 //        TimeSeriesCollection dataset2 = new TimeSeriesCollection();
 //        dataset2.addSeries(series2);
 //
-//        TimeSeries series3 = new TimeSeries("Hospital Beds/1000 people");
+//        org.jfree.data.time.TimeSeries series3 = new org.jfree.data.time.TimeSeries("Hospital Beds/1000 people");
 //        series3.add(new Year(2018), 2.92);
 //        series3.add(new Year(2017), 2.87);
 //        series3.add(new Year(2016), 2.77);
@@ -74,30 +73,31 @@ public class ScatterChart extends Viewer {
 //        series3.add(new Year(2011), 2.97);
 //        series3.add(new Year(2010), 3.05);
 //
-//
+//        TimeSeriesCollection dataset = new TimeSeriesCollection();
 //        dataset.addSeries(series1);
 //        dataset.addSeries(series3);
 
         XYPlot plot = new XYPlot();
-        XYItemRenderer itemrenderer1 = new XYLineAndShapeRenderer(false, true);
-//        XYItemRenderer itemrenderer2 = new XYLineAndShapeRenderer(false, true);
+        XYSplineRenderer splinerenderer1 = new XYSplineRenderer();
+//        XYSplineRenderer splinerenderer2 = new XYSplineRenderer();
 
         plot.setDataset(0, dataset);
-        plot.setRenderer(0, itemrenderer1);
+        plot.setRenderer(0, splinerenderer1);
         DateAxis domainAxis = new DateAxis(xAxisLabel);
         plot.setDomainAxis(domainAxis);
         plot.setRangeAxis(new NumberAxis(yAxisLabel));
 
 //        plot.setDataset(1, dataset2);
-//        plot.setRenderer(1, itemrenderer2);
+//        plot.setRenderer(1, splinerenderer2);
 //        plot.setRangeAxis(1, new NumberAxis("US$"));
 
         plot.mapDatasetToRangeAxis(0, 0);// 1st dataset to 1st y-axis
         plot.mapDatasetToRangeAxis(1, 1); // 2nd dataset to 2nd y-axis
-        String fontName = javax.swing.UIManager.getDefaults().getFont("Label.font").getFontName();
-        JFreeChart scatterChart = new JFreeChart(title, new Font(fontName, java.awt.Font.BOLD, 18), plot, true);
 
-        ChartPanel chartPanel = new ChartPanel(scatterChart);
+        String fontName = javax.swing.UIManager.getDefaults().getFont("Label.font").getFontName();
+        JFreeChart chart = new JFreeChart(title, new Font(fontName, java.awt.Font.BOLD, 18), plot, true);
+
+        ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(400, 300));
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         chartPanel.setBackground(GUI.getInstance().theme.getBorderColor());
@@ -107,6 +107,6 @@ public class ScatterChart extends Viewer {
 
     public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel){
         viewerPanel.removeAll();
-        viewerPanel.add(createScatter(analyzedData, title, xAxisLabel, yAxisLabel));
+        viewerPanel.add(createTimeSeries(analyzedData, title, xAxisLabel, yAxisLabel));
     }
 }

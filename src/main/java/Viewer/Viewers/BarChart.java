@@ -20,16 +20,13 @@ public class BarChart extends Viewer {
     public BarChart () {
         super();
         viewerPanel.add(createBar(new JsonObject[0][0], "", "", ""));
-        GUI.getInstance().mainFrame.addViewer(viewerPanel);
     }
 
     public JPanel createBar(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         for (JsonObject[] jsonObjects: analyzedData) {
             for (JsonObject jsonObject: jsonObjects) {
-                System.out.println(gson.toJson(jsonObject));
                 dataset.setValue(jsonObject.get("value").getAsDouble(), ((JsonObject) jsonObject.get("indicator")).get("value").getAsString(), jsonObject.get("date").getAsString());
             }
         }
@@ -83,7 +80,8 @@ public class BarChart extends Viewer {
         plot.mapDatasetToRangeAxis(0, 0);// 1st dataset to 1st y-axis
 //        plot.mapDatasetToRangeAxis(1, 1); // 2nd dataset to 2nd y-axis
 
-        JFreeChart barChart = new JFreeChart(title, new Font("Arial", java.awt.Font.BOLD, 18), plot, true);
+        String fontName = javax.swing.UIManager.getDefaults().getFont("Label.font").getFontName();
+        JFreeChart barChart = new JFreeChart(title, new Font(fontName, java.awt.Font.BOLD, 18), plot, true);
 
         // Different way to create bar chart
         /*
@@ -105,16 +103,7 @@ public class BarChart extends Viewer {
     }
 
     public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel){
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//
-//        for (JsonObject[] jsonObjects: analyzedData) {
-//            for (JsonObject jsonObject: jsonObjects) {
-//                System.out.println(gson.toJson(jsonObject));
-//            }
-//        }
-
         viewerPanel.removeAll();
         viewerPanel.add(createBar(analyzedData, title, xAxisLabel, yAxisLabel));
-        GUI.getInstance().refreshMainUI();
     }
 }
