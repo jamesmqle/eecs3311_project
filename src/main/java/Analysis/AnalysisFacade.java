@@ -30,6 +30,9 @@ public class AnalysisFacade {
             case "CO2vsEnergyUsevsAirPollution":
                 analysisStrategy = new CO2vsEnergyUsevsAirPollution();
                 break;
+            case "CO2vsGDP":
+                analysisStrategy = new CO2vsGDP();
+                break;
             default:
                 // code block
         }
