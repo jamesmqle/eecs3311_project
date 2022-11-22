@@ -28,7 +28,7 @@ public class ViewerFacade {
 
         Viewer newViewer = viewerFactory.buildViewer(type);
         currentViewers.put(type, newViewer);
-        newViewer.add();
+        newViewer.add(true);
 
         //ToDo: Need to tell the viewer to observe the current analysis
     }
@@ -41,20 +41,21 @@ public class ViewerFacade {
             return;
 
         Viewer removeViewer = currentViewers.get(type);
-        removeViewer.remove();
+        removeViewer.remove(true);
 
         currentViewers.remove(type);
     }
 
     public void refreshViewers() {
-        List<JPanel> viewerPanels = new ArrayList<>();
         for (String viewerType: currentViewers.keySet()) {
+            currentViewers.get(viewerType).remove(false);
+
             Viewer refreshedViewer = viewerFactory.buildViewer(viewerType);
             currentViewers.put(viewerType, refreshedViewer);
-            viewerPanels.add(refreshedViewer.viewerPanel);
+            refreshedViewer.add(false);
         }
 
-        GUI.getInstance().mainFrame.addViewers(viewerPanels);
+        GUI.getInstance().refreshMainUI();
     }
 
 }

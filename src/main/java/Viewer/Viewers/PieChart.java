@@ -1,10 +1,14 @@
 package Viewer.Viewers;
 
 import GUI.GUI;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -15,28 +19,20 @@ public class PieChart extends Viewer {
 
     public PieChart () {
         super();
-        viewerPanel.add(createPie());
-        GUI.getInstance().mainFrame.addViewer(viewerPanel);
+        viewerPanel.add(createPie(new JsonObject[0][0], "", "", ""));
     }
 
-    private JPanel createPie() {
-        // Different way to create pie chart
-        /*
-         * var dataset = new DefaultPieDataset(); dataset.setValue("Unemployed", 3.837);
-         * dataset.setValue("Employed", 96.163);
-         *
-         * JFreeChart pieChart = ChartFactory.createPieChart("Women's Unemployment",
-         * dataset, true, true, false);
-         */
-
+    private JPanel createPie(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(3.946, "Unemployed", "Men");
-        dataset.addValue(96.054, "Employed", "Men");
-        dataset.addValue(3.837, "Unemployed", "Women");
-        dataset.addValue(96.163, "Employed", "Women");
 
-        JFreeChart pieChart = ChartFactory.createMultiplePieChart("Unemployment: Men vs Women", dataset,
-                TableOrder.BY_COLUMN, true, true, false);
+        for (JsonObject[] jsonObjects: analyzedData) {
+            for (JsonObject jsonObject: jsonObjects) {
+                dataset.addValue(jsonObject.get("value").getAsDouble(), ((JsonObject) jsonObject.get("indicator")).get("value").getAsString(), "");
+            }
+        }
+
+        String fontName = javax.swing.UIManager.getDefaults().getFont("Label.font").getFontName();
+        JFreeChart pieChart = ChartFactory.createMultiplePieChart(title, dataset, TableOrder.BY_COLUMN, true, true, true);
 
         ChartPanel chartPanel = new ChartPanel(pieChart);
         chartPanel.setPreferredSize(new Dimension(400, 300));
@@ -46,5 +42,17 @@ public class PieChart extends Viewer {
         return chartPanel;
     }
 
-    public void update(JsonObject[][] analyzedData){}
+    public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        for (JsonObject[] jsonObjects: analyzedData) {
+            for (JsonObject jsonObject: jsonObjects) {
+                System.out.println(gson.toJson(jsonObject));
+            }
+        }
+
+        viewerPanel.removeAll();
+        viewerPanel.add(createPie(analyzedData, title, xAxisLabel, yAxisLabel));
+    }
 }

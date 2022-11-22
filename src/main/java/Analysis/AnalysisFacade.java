@@ -1,5 +1,6 @@
 package Analysis;
 
+import GUI.GUI;
 import Viewer.Viewers.Viewer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,15 +24,18 @@ public class AnalysisFacade {
 
     private List<Viewer> viewerObservers = new ArrayList<>();
 
-    public void setAnalysis(String code){
-        code = code.replaceAll(" ", "");
+    public void setAnalysis(String type){
+        type = type.replaceAll(" ", "");
 
-        switch(code) {
+        switch(type) {
             case "CO2vsEnergyUsevsAirPollution":
                 analysisStrategy = new CO2vsEnergyUsevsAirPollution();
                 break;
             case "CO2vsGDP":
                 analysisStrategy = new CO2vsGDP();
+                break;
+            case "ForestArea":
+                analysisStrategy = new ForestArea();
                 break;
             default:
                 // code block
@@ -39,7 +43,6 @@ public class AnalysisFacade {
     }
 
     public void runAnalysis(){
-        System.out.println("facade");
         JsonObject[][] analyzedData = analysisStrategy.runAnalysis();
 
         updateViewerObservers(analyzedData);
@@ -57,5 +60,6 @@ public class AnalysisFacade {
         for (Viewer viewerObserver: viewerObservers) {
             viewerObserver.update(analyzedData, analysisStrategy.getTitle(), analysisStrategy.getXAxisLabel(), analysisStrategy.getYAxisLabel());
         }
+        GUI.getInstance().refreshMainUI();
     }
 }

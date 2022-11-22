@@ -133,6 +133,7 @@ public class MainUI extends JFrame {
         Vector<String> methodsNames = new Vector<String>();
         methodsNames.add("CO2 vs Energy Use vs Air Pollution");
         methodsNames.add("CO2 vs GDP");
+        methodsNames.add("Forest Area");
 
         methodsList = new CustomComboBox<String>(methodsNames);
 
@@ -185,14 +186,16 @@ public class MainUI extends JFrame {
         GUI.getInstance().refreshMainUI();
     }
 
-    public void addViewer(JPanel viewer) {
+    public void addViewer(JPanel viewer, boolean refresh) {
         viewerPanel.add(viewer);
-        GUI.getInstance().refreshMainUI();
+        if(refresh)
+            GUI.getInstance().refreshMainUI();
     }
 
-    public void removeViewer(JPanel viewer) {
+    public void removeViewer(JPanel viewer, boolean refresh) {
         viewerPanel.remove(viewer);
-        GUI.getInstance().refreshMainUI();
+        if(refresh)
+            GUI.getInstance().refreshMainUI();
     }
 
     public String getFromYear() {

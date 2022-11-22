@@ -15,12 +15,13 @@ public abstract class Viewer {
         viewerPanel.setLayout(new GridLayout(0, 1));
     }
 
-    public void add() {
+    public void add(boolean refresh) {
+        GUI.getInstance().mainFrame.addViewer(viewerPanel, refresh);
         AnalysisFacade.getInstance().attach(this);
     }
 
-    public void remove() {
-        GUI.getInstance().mainFrame.removeViewer(viewerPanel);
+    public void remove(boolean refresh) {
+        GUI.getInstance().mainFrame.removeViewer(viewerPanel, refresh);
         AnalysisFacade.getInstance().detach(this);
     }
 
