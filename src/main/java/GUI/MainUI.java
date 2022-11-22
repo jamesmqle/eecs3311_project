@@ -132,6 +132,7 @@ public class MainUI extends JFrame {
 
         Vector<String> methodsNames = new Vector<String>();
         methodsNames.add("CO2 vs Energy Use vs Air Pollution");
+        methodsNames.add("CO2 vs GDP");
 
         methodsList = new CustomComboBox<String>(methodsNames);
 
