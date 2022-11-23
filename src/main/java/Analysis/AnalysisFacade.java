@@ -37,6 +37,9 @@ public class AnalysisFacade {
             case "ForestArea":
                 analysisStrategy = new ForestArea();
                 break;
+            case "GovernmentExpenditureOnEducation":
+                analysisStrategy = new GovernmentExpenditureOnEducation();
+                break;
             default:
                 // code block
         }
