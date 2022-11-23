@@ -17,7 +17,6 @@ Viewer\ViewerFactory.class
 Analysis\AnalysisFacade.class
 GUI\Themes\DarkTheme.class
 Viewer\Viewers\Viewer.class
-Analysis\MortalityVSExpenses.class
 Viewer\Viewers\BarChart.class
 Analysis\CO2vsEnergyUsevsAirPollution.class
 GUI\UIElements\CustomComboBox$1.class
@@ -34,4 +33,5 @@ DataFetcher\Filter.class
 GUI\UIElements\CustomComboBox$2.class
 GUI\UIElements\CustomButton$1.class
 Viewer\Viewers\LineChart.class
+Analysis\GovernmentExpenditureOnEducation.class
 GUI\LoginUI.class

@@ -5,32 +5,27 @@ import GUI.GUI;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import java.util.Arrays;
+public class GovernmentExpenditureOnEducation extends AnalysisStrategy {
 
-public class ForestArea extends AnalysisStrategy {
-
-    public ForestArea(){
+    public GovernmentExpenditureOnEducation(){
 
         DataFetcherFacade.getInstance().dateRange.setRange(GUI.getInstance().mainFrame.getFromYear(), GUI.getInstance().mainFrame.getToYear());
         DataFetcherFacade.getInstance().country.setCountry(GUI.getInstance().mainFrame.getCountry());
 
-        dataKeys.add("AG.LND.FRST.ZS"); // Forest Area
+        dataKeys.add("SE.XPD.TOTL.GD.ZS"); // Government Expenditure On Education
 
         title = "Average Forest Area";
         xAxisLabel = "";
-        yAxisLabel = "Land Area (%)";
-
+        yAxisLabel = "Spending (%)";
     }
 
     @Override
     public JsonObject[][] runAnalysis() {
-        System.out.println("ForestArea");
-
-        JsonObject[] forestAreaData = DataFetcherFacade.getInstance().fetchData(dataKeys.get(0));
+        JsonObject[] expenditureData = DataFetcherFacade.getInstance().fetchData(dataKeys.get(0));
 
         JsonObject[][] analyzedData = new JsonObject[1][];
 
-        analyzedData[0] = averageLandArea(forestAreaData);
+        analyzedData[0] = averageLandArea(expenditureData);
 
         return analyzedData;
     }
@@ -58,9 +53,8 @@ public class ForestArea extends AnalysisStrategy {
 
         returnData[1].addProperty("value", 100 - average);
         returnData[1].addProperty("date", "");
-        ((JsonObject) returnData[1].get("indicator")).addProperty("value", "Other (% of land area)");
+        ((JsonObject) returnData[1].get("indicator")).addProperty("value", "Other (% of GDP)");
 
         return returnData;
     }
-
 }
