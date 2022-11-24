@@ -1,7 +1,7 @@
 package Viewer.Viewers;
 
 import Analysis.AnalysisFacade;
-import GUI.GUI;
+import GUI.GUIFacade;
 import com.google.gson.JsonObject;
 
 import javax.swing.*;
@@ -17,12 +17,12 @@ public abstract class Viewer {
     }
 
     public void add(boolean refresh) {
-        GUI.getInstance().mainFrame.addViewer(viewerPanel, refresh);
+        GUIFacade.getInstance().mainFrame.addViewer(viewerPanel, refresh);
         AnalysisFacade.getInstance().attach(this);
     }
 
     public void remove(boolean refresh) {
-        GUI.getInstance().mainFrame.removeViewer(viewerPanel, refresh);
+        GUIFacade.getInstance().mainFrame.removeViewer(viewerPanel, refresh);
         AnalysisFacade.getInstance().detach(this);
     }
 
@@ -41,13 +41,13 @@ public abstract class Viewer {
 
     protected JPanel notSupported() {
         JLabel label = new JLabel("Not Supported");
-        label.setForeground(GUI.getInstance().theme.getText2Color());
+        label.setForeground(GUIFacade.getInstance().theme.getText2Color());
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         panel.setPreferredSize(new Dimension(400, 300));
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        panel.setBackground(GUI.getInstance().theme.getBorderColor());
+        panel.setBackground(GUIFacade.getInstance().theme.getBorderColor());
         panel.add(label);
 
         return panel;

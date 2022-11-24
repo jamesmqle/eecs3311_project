@@ -1,4 +1,4 @@
-package DataFetcher;
+package DataFetcher.Filters;
 
 public abstract class Filter {
 

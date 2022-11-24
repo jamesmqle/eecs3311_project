@@ -1,6 +1,6 @@
 package Viewer.Viewers;
 
-import GUI.GUI;
+import GUI.GUIFacade;
 import com.google.gson.JsonObject;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -56,7 +56,7 @@ public class TimeSeriesChart extends Viewer {
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(400, 300));
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        chartPanel.setBackground(GUI.getInstance().theme.getBorderColor());
+        chartPanel.setBackground(GUIFacade.getInstance().theme.getBorderColor());
 
         return chartPanel;
     }

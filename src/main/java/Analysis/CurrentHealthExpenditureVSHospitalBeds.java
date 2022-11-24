@@ -1,7 +1,7 @@
 package Analysis;
 
 import DataFetcher.DataFetcherFacade;
-import GUI.GUI;
+import GUI.GUIFacade;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -12,8 +12,8 @@ public class CurrentHealthExpenditureVSHospitalBeds extends AnalysisStrategy {
 
     public CurrentHealthExpenditureVSHospitalBeds(){
 
-        DataFetcherFacade.getInstance().dateRange.setRange(GUI.getInstance().mainFrame.getFromYear(), GUI.getInstance().mainFrame.getToYear());
-        DataFetcherFacade.getInstance().country.setCountry(GUI.getInstance().mainFrame.getCountry());
+        DataFetcherFacade.getInstance().dateRange.setRange(GUIFacade.getInstance().mainFrame.getFromYear(), GUIFacade.getInstance().mainFrame.getToYear());
+        DataFetcherFacade.getInstance().country.setCountry(GUIFacade.getInstance().mainFrame.getCountry());
 
         dataKeys.add("SH.XPD.CHEX.GD.ZS"); // Current health expenditure
         dataKeys.add("SH.MED.BEDS.ZS"); // Hospital beds

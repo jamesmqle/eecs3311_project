@@ -3,40 +3,34 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
-import java.util.List;
 
 import javax.swing.*;
 
 import Analysis.AnalysisFacade;
 import Authentication.AuthenticationFacade;
 import Authentication.DatabaseTable;
-import Authentication.User;
-import DataFetcher.DataFetcherFacade;
 import GUI.UIElements.CustomButton;
 import GUI.UIElements.CustomComboBox;
 import Viewer.ViewerFacade;
 import com.google.gson.JsonObject;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 public class MainUI extends JFrame {
 
-    JPanel viewerPanel;
+    public JPanel viewerPanel;
 
-    JButton recalculateBtn;
-    JButton addViewBtn;
-    JButton removeViewBtn;
-    JButton themeSwitch;
+    private JButton recalculateBtn;
+    private JButton addViewBtn;
+    private JButton removeViewBtn;
+    private JButton themeSwitch;
 
-    CustomComboBox<String> viewsList;
-    CustomComboBox<String> countriesList;
-    Map<String, String> countriesNames;
-    CustomComboBox<String> fromList;
-    CustomComboBox<String> toList;
-    CustomComboBox<String> methodsList;
+    private CustomComboBox<String> viewsList;
+    private CustomComboBox<String> countriesList;
+    private Map<String, String> countriesNames;
+    private CustomComboBox<String> fromList;
+    private CustomComboBox<String> toList;
+    private CustomComboBox<String> methodsList;
 
-    DatabaseTable countriesDatabase = new DatabaseTable("src/main/resources/database/countries.csv");
+    private DatabaseTable countriesDatabase = new DatabaseTable("src/main/resources/database/countries.csv");
 
     public MainUI() {
         super("World Data Analyzer");
@@ -52,7 +46,7 @@ public class MainUI extends JFrame {
 
         // Set top bar
         JLabel chooseCountryLabel = new JLabel("Choose a country: ");
-        chooseCountryLabel.setForeground(GUI.getInstance().theme.getText2Color());
+        chooseCountryLabel.setForeground(GUIFacade.getInstance().theme.getText2Color());
         countriesNames = new TreeMap<>();
         for (JsonObject country : countriesDatabase.getData()) {
             countriesNames.put(country.get("name").getAsString(), country.get("key").getAsString());
@@ -61,9 +55,9 @@ public class MainUI extends JFrame {
         countriesList.addActionListener(this::actionPerformed);
 
         JLabel from = new JLabel("From");
-        from.setForeground(GUI.getInstance().theme.getText2Color());
+        from.setForeground(GUIFacade.getInstance().theme.getText2Color());
         JLabel to = new JLabel("To");
-        to.setForeground(GUI.getInstance().theme.getText2Color());
+        to.setForeground(GUIFacade.getInstance().theme.getText2Color());
         Vector<String> years = new Vector<>();
         for (int i = 2021; i >= 2010; i--) {
             years.add("" + i);
@@ -72,18 +66,18 @@ public class MainUI extends JFrame {
         toList = new CustomComboBox<>(years);
 
         JPanel north = new JPanel();
-        north.setBackground(GUI.getInstance().theme.getBackgroundColor());
+        north.setBackground(GUIFacade.getInstance().theme.getBackgroundColor());
         north.setLayout(new OverlayLayout(north));
 
         JPanel northBottom = new JPanel();
-        northBottom.setBackground(GUI.getInstance().theme.getBackgroundColor());
+        northBottom.setBackground(GUIFacade.getInstance().theme.getBackgroundColor());
 
         JPanel northTopRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        northTopRight.setBackground(GUI.getInstance().theme.getBackgroundColor());
+        northTopRight.setBackground(GUIFacade.getInstance().theme.getBackgroundColor());
         northTopRight.setOpaque(false);
 
         JPanel northTopLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        northTopLeft.setBackground(GUI.getInstance().theme.getBackgroundColor());
+        northTopLeft.setBackground(GUIFacade.getInstance().theme.getBackgroundColor());
         northTopLeft.setOpaque(false);
 
         northBottom.add(chooseCountryLabel);
@@ -108,16 +102,16 @@ public class MainUI extends JFrame {
         recalculateBtn.addActionListener(this::actionPerformed);
 
         JLabel viewsLabel = new JLabel("Available Views: ");
-        viewsLabel.setForeground(GUI.getInstance().theme.getText2Color());
+        viewsLabel.setForeground(GUIFacade.getInstance().theme.getText2Color());
 
-        Vector<String> viewsNames = new Vector<String>();
+        Vector<String> viewsNames = new Vector<>();
         viewsNames.add("Pie Chart");
         viewsNames.add("Line Chart");
         viewsNames.add("Bar Chart");
         viewsNames.add("Scatter Chart");
         viewsNames.add("Time Series");
         viewsNames.add("Report");
-        viewsList = new CustomComboBox<String>(viewsNames);
+        viewsList = new CustomComboBox<>(viewsNames);
         Image plusImage = new ImageIcon("src/main/resources/plus.png").getImage();
         addViewBtn = new CustomButton(new ImageIcon(plusImage.getScaledInstance(10,10,java.awt.Image.SCALE_SMOOTH)));
         addViewBtn.setPreferredSize(new Dimension(25, 25));
@@ -128,9 +122,9 @@ public class MainUI extends JFrame {
         removeViewBtn.addActionListener(this::actionPerformed);
 
         JLabel methodLabel = new JLabel("        Choose analysis method: ");
-        methodLabel.setForeground(GUI.getInstance().theme.getText2Color());
+        methodLabel.setForeground(GUIFacade.getInstance().theme.getText2Color());
 
-        Vector<String> methodsNames = new Vector<String>();
+        Vector<String> methodsNames = new Vector<>();
         methodsNames.add("CO2 vs Energy Use vs Air Pollution");
         methodsNames.add("Air Pollution vs Forest Area");
         methodsNames.add("CO2 vs GDP");
@@ -142,10 +136,10 @@ public class MainUI extends JFrame {
 
 
 
-        methodsList = new CustomComboBox<String>(methodsNames);
+        methodsList = new CustomComboBox<>(methodsNames);
 
         JPanel south = new JPanel();
-        south.setBackground(GUI.getInstance().theme.getBackgroundColor());
+        south.setBackground(GUIFacade.getInstance().theme.getBackgroundColor());
         south.add(viewsLabel);
         south.add(viewsList);
         south.add(addViewBtn);
@@ -157,26 +151,25 @@ public class MainUI extends JFrame {
 
         // Set charts region
         viewerPanel = new JPanel();
-        viewerPanel.setBackground(GUI.getInstance().theme.getBackgroundColor());
+        viewerPanel.setBackground(GUIFacade.getInstance().theme.getBackgroundColor());
         viewerPanel.setSize(1250, 700);
         viewerPanel.setLayout(new GridLayout(2, 0));
 
-        getContentPane().setBackground(GUI.getInstance().theme.getBackgroundColor());
+        getContentPane().setBackground(GUIFacade.getInstance().theme.getBackgroundColor());
         getContentPane().add(north, BorderLayout.NORTH);
         getContentPane().add(south, BorderLayout.SOUTH);
         getContentPane().add(viewerPanel, BorderLayout.WEST);
     }
 
-    public void userDisplay(JPanel north){
-        User currentUser = AuthenticationFacade.getInstance().currentUser;
-        JLabel userLabel = new JLabel("Username: " + currentUser.getUsername());
-        userLabel.setForeground(GUI.getInstance().theme.getText2Color());
+    private void userDisplay(JPanel north) {
+        JLabel userLabel = new JLabel("Username: " + AuthenticationFacade.getInstance().currentUser.getUsername());
+        userLabel.setForeground(GUIFacade.getInstance().theme.getText2Color());
         north.add(userLabel);
     }
 
-    public void themeSwitch(JPanel north){
+    private void themeSwitch(JPanel north) {
         JLabel userLabel = new JLabel("Theme: ");
-        userLabel.setForeground(GUI.getInstance().theme.getText2Color());
+        userLabel.setForeground(GUIFacade.getInstance().theme.getText2Color());
         Image themeImage = new ImageIcon("src/main/resources/refresh.png").getImage();
         themeSwitch = new CustomButton(new ImageIcon(themeImage.getScaledInstance(10,10,java.awt.Image.SCALE_SMOOTH)));
         themeSwitch.setPreferredSize(new Dimension(25, 25));
@@ -185,24 +178,16 @@ public class MainUI extends JFrame {
         north.add(themeSwitch);
     }
 
-    public void addViewers (List<JPanel> viewers) {
-        viewerPanel.removeAll();
-        for (JPanel viewer: viewers) {
-            viewerPanel.add(viewer);
-        }
-        GUI.getInstance().refreshMainUI();
-    }
-
     public void addViewer(JPanel viewer, boolean refresh) {
         viewerPanel.add(viewer);
         if(refresh)
-            GUI.getInstance().refreshMainUI();
+            GUIFacade.getInstance().refreshMainUI();
     }
 
     public void removeViewer(JPanel viewer, boolean refresh) {
         viewerPanel.remove(viewer);
         if(refresh)
-            GUI.getInstance().refreshMainUI();
+            GUIFacade.getInstance().refreshMainUI();
     }
 
     public String getFromYear() {
@@ -217,7 +202,7 @@ public class MainUI extends JFrame {
         return countriesNames.get(countriesList.getSelectedItem().toString());
     }
 
-    public void actionPerformed(ActionEvent e) {
+    private void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == recalculateBtn) {
             AnalysisFacade.getInstance().setAnalysis(methodsList.getSelectedItem().toString());
@@ -229,9 +214,11 @@ public class MainUI extends JFrame {
         } else if (e.getSource() == removeViewBtn) {
             ViewerFacade.getInstance().removeViewer(viewsList.getSelectedItem().toString());
         } else if (e.getSource() ==  fromList) {
+
         } else if (e.getSource() ==  toList) {
+
         } else if (e.getSource() == themeSwitch) {
-            GUI.getInstance().theme.toggleTheme();
+            GUIFacade.getInstance().theme.toggleTheme();
         }
     }
 

@@ -6,16 +6,16 @@ import Viewer.ViewerFacade;
 
 import javax.swing.*;
 
-public class GUI {
+public class GUIFacade {
 
     public LoginUI loginFrame;
     public MainUI mainFrame;
 
-    private static final GUI gui = new GUI();
-    private GUI() {
+    private static final GUIFacade gui = new GUIFacade();
+    private GUIFacade() {
         theme.setTheme(new LightTheme());
     }
-    public static GUI getInstance() {
+    public static GUIFacade getInstance() {
         return gui;
     }
 

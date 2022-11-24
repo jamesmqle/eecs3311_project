@@ -1,4 +1,4 @@
-package DataFetcher;
+package DataFetcher.Filters;
 
 public class Country extends Filter{
 

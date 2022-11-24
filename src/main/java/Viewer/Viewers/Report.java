@@ -1,13 +1,10 @@
 package Viewer.Viewers;
 
-import GUI.GUI;
+import GUI.GUIFacade;
 import com.google.gson.JsonObject;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.Year;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Report extends Viewer {
 
@@ -46,7 +43,7 @@ public class Report extends Viewer {
         JScrollPane outputScrollPane = new JScrollPane(report);
         outputScrollPane.setPreferredSize(new Dimension(400, 320));
         JPanel outputPanel = new JPanel();
-        outputPanel.setBackground(GUI.getInstance().theme.getBorderColor());
+        outputPanel.setBackground(GUIFacade.getInstance().theme.getBorderColor());
         outputPanel.add(outputScrollPane);
 
         return outputPanel;

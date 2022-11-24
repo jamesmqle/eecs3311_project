@@ -1,5 +1,5 @@
 package GUI.UIElements;
-import GUI.GUI;
+import GUI.GUIFacade;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
@@ -16,12 +16,12 @@ public class CustomComboBox<E> extends JComboBox {
 
         this.setMaximumRowCount(20);
 
-        this.setBackground(GUI.getInstance().theme.getBorderColor());
-        this.setForeground(GUI.getInstance().theme.getText2Color());
+        this.setBackground(GUIFacade.getInstance().theme.getBorderColor());
+        this.setForeground(GUIFacade.getInstance().theme.getText2Color());
 
         this.setOpaque(true);
         this.setFocusable(false);
-        this.setBorder(BorderFactory.createLineBorder(GUI.getInstance().theme.getBorderColor(), 5));
+        this.setBorder(BorderFactory.createLineBorder(GUIFacade.getInstance().theme.getBorderColor(), 5));
 
         var combo = this;
         this.setUI(new BasicComboBoxUI() {
@@ -29,13 +29,13 @@ public class CustomComboBox<E> extends JComboBox {
             protected ComboPopup createPopup() {
                 return new BasicComboPopup(combo) {
                     {
-                        this.setBorder(BorderFactory.createLineBorder(GUI.getInstance().theme.getBorderColor(), 2));
+                        this.setBorder(BorderFactory.createLineBorder(GUIFacade.getInstance().theme.getBorderColor(), 2));
                     }
                 };
             }
             @Override
             protected JButton createArrowButton() {
-                BasicArrowButton result = new BasicArrowButton(BasicArrowButton.SOUTH, GUI.getInstance().theme.getMainColor(), GUI.getInstance().theme.getMainColor(), GUI.getInstance().theme.getText1Color(), GUI.getInstance().theme.getMainColor());
+                BasicArrowButton result = new BasicArrowButton(BasicArrowButton.SOUTH, GUIFacade.getInstance().theme.getMainColor(), GUIFacade.getInstance().theme.getMainColor(), GUIFacade.getInstance().theme.getText1Color(), GUIFacade.getInstance().theme.getMainColor());
                 result.setOpaque(true);
                 return result;
             }
@@ -47,8 +47,8 @@ public class CustomComboBox<E> extends JComboBox {
                                                           boolean isSelected, boolean cellHasFocus) {
                 JLabel result = new JLabel(value);
                 result.setOpaque(true);
-                result.setBackground(isSelected ? GUI.getInstance().theme.getMainColor() : GUI.getInstance().theme.getBorderColor());
-                result.setForeground(isSelected ? GUI.getInstance().theme.getText1Color() : GUI.getInstance().theme.getText2Color());
+                result.setBackground(isSelected ? GUIFacade.getInstance().theme.getMainColor() : GUIFacade.getInstance().theme.getBorderColor());
+                result.setForeground(isSelected ? GUIFacade.getInstance().theme.getText1Color() : GUIFacade.getInstance().theme.getText2Color());
                 return result;
             }
         });

@@ -1,4 +1,4 @@
-package DataFetcher;
+package DataFetcher.Filters;
 
 import java.time.Year;
 

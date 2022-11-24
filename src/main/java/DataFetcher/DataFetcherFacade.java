@@ -1,5 +1,7 @@
 package DataFetcher;
 
+import DataFetcher.Filters.Country;
+import DataFetcher.Filters.DateRange;
 import com.google.gson.JsonObject;
 
 public class DataFetcherFacade {
