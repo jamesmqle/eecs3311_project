@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Viewer {
 
@@ -25,5 +26,30 @@ public abstract class Viewer {
         AnalysisFacade.getInstance().detach(this);
     }
 
-    public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel){}
+    protected JPanel createViewerUI(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
+        return notSupported();
+    }
+
+    public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel, ArrayList<String> supportedViewers){
+        viewerPanel.removeAll();
+
+        if(!supportedViewers.contains(this.getClass().getSimpleName()))
+            viewerPanel.add(notSupported());
+        else
+            viewerPanel.add(createViewerUI(analyzedData, title, xAxisLabel, yAxisLabel));
+    }
+
+    protected JPanel notSupported() {
+        JLabel label = new JLabel("Not Supported");
+        label.setForeground(GUI.getInstance().theme.getText2Color());
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        panel.setPreferredSize(new Dimension(400, 300));
+        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        panel.setBackground(GUI.getInstance().theme.getBorderColor());
+        panel.add(label);
+
+        return panel;
+    }
 }

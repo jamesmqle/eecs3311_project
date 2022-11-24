@@ -1,14 +1,10 @@
 package Viewer.Viewers;
 
 import GUI.GUI;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -19,10 +15,10 @@ public class PieChart extends Viewer {
 
     public PieChart () {
         super();
-        viewerPanel.add(createPie(new JsonObject[0][0], "", "", ""));
+        viewerPanel.add(createViewerUI(new JsonObject[0][0], "", "", ""));
     }
 
-    private JPanel createPie(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
+    protected JPanel createViewerUI(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         for (JsonObject[] jsonObjects: analyzedData) {
@@ -40,19 +36,5 @@ public class PieChart extends Viewer {
         chartPanel.setBackground(GUI.getInstance().theme.getBorderColor());
 
         return chartPanel;
-    }
-
-    public void update(JsonObject[][] analyzedData, String title, String xAxisLabel, String yAxisLabel) {
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        for (JsonObject[] jsonObjects: analyzedData) {
-            for (JsonObject jsonObject: jsonObjects) {
-                System.out.println(gson.toJson(jsonObject));
-            }
-        }
-
-        viewerPanel.removeAll();
-        viewerPanel.add(createPie(analyzedData, title, xAxisLabel, yAxisLabel));
     }
 }

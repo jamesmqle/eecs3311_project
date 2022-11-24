@@ -29,6 +29,11 @@ public class CO2vsEnergyUsevsAirPollution extends AnalysisStrategy {
         xAxisLabel = "Year";
         yAxisLabel = "Percentage Change (%)";
 
+        supportedViewers.add("BarChart");
+        supportedViewers.add("LineChart");
+        supportedViewers.add("ScatterChart");
+        supportedViewers.add("TimeSeriesChart");
+        supportedViewers.add("Report");
     }
 
     @Override

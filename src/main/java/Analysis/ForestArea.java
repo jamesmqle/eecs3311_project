@@ -20,6 +20,8 @@ public class ForestArea extends AnalysisStrategy {
         xAxisLabel = "";
         yAxisLabel = "Land Area (%)";
 
+        supportedViewers.add("BarChart");
+        supportedViewers.add("PieChart");
     }
 
     @Override

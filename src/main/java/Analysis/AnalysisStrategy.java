@@ -11,6 +11,8 @@ public abstract class AnalysisStrategy {
     protected String xAxisLabel;
     protected String yAxisLabel;
 
+    protected ArrayList<String> supportedViewers = new ArrayList<>();
+
     public AnalysisStrategy(){}
 
     public abstract JsonObject[][] runAnalysis();
@@ -27,5 +29,11 @@ public abstract class AnalysisStrategy {
 
     public String getYAxisLabel() {
         return yAxisLabel;
+    }
+
+    public ArrayList<String> getSupportedViewers () {
+        ArrayList<String> supportedViewersCopy = new ArrayList<>();
+        supportedViewersCopy.addAll(supportedViewers);
+        return supportedViewersCopy;
     }
 }

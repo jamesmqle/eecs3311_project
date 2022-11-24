@@ -7,6 +7,7 @@ Analysis\AnalysisStrategy.class
 GUI\UIElements\CustomComboBox$1$1.class
 DataFetcher\DataFetcherFacade.class
 Viewer\Viewers\TimeSeriesChart.class
+Analysis\CurrentHealthExpenditureVSHospitalBeds.class
 Analysis\ForestArea.class
 GUI\UIElements\CustomComboBox.class
 Main.class
@@ -33,5 +34,6 @@ DataFetcher\Filter.class
 GUI\UIElements\CustomComboBox$2.class
 GUI\UIElements\CustomButton$1.class
 Viewer\Viewers\LineChart.class
+Analysis\GovernmentExpenditureOnEducationVSCurrentHealthExpenditure.class
 Analysis\GovernmentExpenditureOnEducation.class
 GUI\LoginUI.class
