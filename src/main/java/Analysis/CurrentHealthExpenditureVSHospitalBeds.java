@@ -21,6 +21,12 @@ public class CurrentHealthExpenditureVSHospitalBeds extends AnalysisStrategy {
         title = "Current Health Expenditure vs Hospital Beds";
         xAxisLabel = "Year";
         yAxisLabel = "Ratio (Current Health Expenditure / Hospital Beds)";
+
+        supportedViewers.add("BarChart");
+        supportedViewers.add("LineChart");
+        supportedViewers.add("ScatterChart");
+        supportedViewers.add("TimeSeriesChart");
+        supportedViewers.add("Report");
     }
 
     @Override

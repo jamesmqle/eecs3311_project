@@ -67,7 +67,7 @@ public class AnalysisFacade {
 
     private void updateViewerObservers(JsonObject[][] analyzedData) {
         for (Viewer viewerObserver: viewerObservers) {
-            viewerObserver.update(analyzedData, analysisStrategy.getTitle(), analysisStrategy.getXAxisLabel(), analysisStrategy.getYAxisLabel());
+            viewerObserver.update(analyzedData, analysisStrategy.getTitle(), analysisStrategy.getXAxisLabel(), analysisStrategy.getYAxisLabel(), analysisStrategy.getSupportedViewers());
         }
         GUI.getInstance().refreshMainUI();
     }

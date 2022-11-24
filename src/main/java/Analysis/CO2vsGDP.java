@@ -26,6 +26,11 @@ public class CO2vsGDP extends AnalysisStrategy {
         xAxisLabel = "Year";
         yAxisLabel = "Ratio (CO2/GDP)";
 
+        supportedViewers.add("BarChart");
+        supportedViewers.add("LineChart");
+        supportedViewers.add("ScatterChart");
+        supportedViewers.add("TimeSeriesChart");
+        supportedViewers.add("Report");
     }
 
     @Override

@@ -17,6 +17,9 @@ public class GovernmentExpenditureOnEducation extends AnalysisStrategy {
         title = "Average Forest Area";
         xAxisLabel = "";
         yAxisLabel = "Spending (%)";
+
+        supportedViewers.add("BarChart");
+        supportedViewers.add("PieChart");
     }
 
     @Override
