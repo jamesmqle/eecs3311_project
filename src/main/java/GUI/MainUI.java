@@ -136,6 +136,7 @@ public class MainUI extends JFrame {
         methodsNames.add("Forest Area");
         methodsNames.add("Current Health Expenditure vs Hospital Beds");
         methodsNames.add("Government Expenditure On Education");
+        methodsNames.add("Government Expenditure On Education vs Current Health Expenditure");
 
         methodsList = new CustomComboBox<String>(methodsNames);
 

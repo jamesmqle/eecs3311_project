@@ -43,6 +43,9 @@ public class AnalysisFacade {
             case "CurrentHealthExpenditurevsHospitalBeds":
                 analysisStrategy = new CurrentHealthExpenditureVSHospitalBeds();
                 break;
+            case "GovernmentExpenditureOnEducationvsCurrentHealthExpenditure":
+                analysisStrategy = new GovernmentExpenditureOnEducationVSCurrentHealthExpenditure();
+                break;
             default:
                 // code block
         }
