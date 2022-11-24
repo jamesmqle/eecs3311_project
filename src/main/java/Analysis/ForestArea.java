@@ -1,18 +1,16 @@
 package Analysis;
 
 import DataFetcher.DataFetcherFacade;
-import GUI.GUI;
+import GUI.GUIFacade;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
-import java.util.Arrays;
 
 public class ForestArea extends AnalysisStrategy {
 
     public ForestArea(){
 
-        DataFetcherFacade.getInstance().dateRange.setRange(GUI.getInstance().mainFrame.getFromYear(), GUI.getInstance().mainFrame.getToYear());
-        DataFetcherFacade.getInstance().country.setCountry(GUI.getInstance().mainFrame.getCountry());
+        DataFetcherFacade.getInstance().dateRange.setRange(GUIFacade.getInstance().mainFrame.getFromYear(), GUIFacade.getInstance().mainFrame.getToYear());
+        DataFetcherFacade.getInstance().country.setCountry(GUIFacade.getInstance().mainFrame.getCountry());
 
         dataKeys.add("AG.LND.FRST.ZS"); // Forest Area
 

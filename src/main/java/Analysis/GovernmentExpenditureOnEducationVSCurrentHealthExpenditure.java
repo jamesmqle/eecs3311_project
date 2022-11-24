@@ -1,6 +1,6 @@
 package Analysis;
 
-import GUI.GUI;
+import GUI.GUIFacade;
 import DataFetcher.DataFetcherFacade;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -12,10 +12,10 @@ public class GovernmentExpenditureOnEducationVSCurrentHealthExpenditure extends 
 
     public GovernmentExpenditureOnEducationVSCurrentHealthExpenditure(){
 
-        int fromYear = Integer.parseInt(GUI.getInstance().mainFrame.getFromYear()) - 1;
+        int fromYear = Integer.parseInt(GUIFacade.getInstance().mainFrame.getFromYear()) - 1;
 
-        DataFetcherFacade.getInstance().dateRange.setRange(Integer.toString(fromYear), GUI.getInstance().mainFrame.getToYear());
-        DataFetcherFacade.getInstance().country.setCountry(GUI.getInstance().mainFrame.getCountry());
+        DataFetcherFacade.getInstance().dateRange.setRange(Integer.toString(fromYear), GUIFacade.getInstance().mainFrame.getToYear());
+        DataFetcherFacade.getInstance().country.setCountry(GUIFacade.getInstance().mainFrame.getCountry());
 
         dataKeys.add("SE.XPD.TOTL.GD.ZS"); // Government Expenditure on Education
         dataKeys.add("SH.XPD.CHEX.GD.ZS"); // Current Health Expenditure

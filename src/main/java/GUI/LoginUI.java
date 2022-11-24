@@ -10,9 +10,9 @@ import java.util.TimerTask;
 
 public class LoginUI extends JFrame {
 
-    JLabel success;
-    JPasswordField passwordText;
-    JTextField userText;
+    private JLabel success;
+    private JPasswordField passwordField;
+    private JTextField usernameField;
 
     public LoginUI() {
         super("Login");
@@ -30,17 +30,17 @@ public class LoginUI extends JFrame {
         userLabel.setBounds(10,10,80,25);
         panel.add(userLabel);
 
-        userText = new JTextField();
-        userText.setBounds(100,10,165,25);
-        panel.add(userText);
+        usernameField = new JTextField();
+        usernameField.setBounds(100,10,165,25);
+        panel.add(usernameField);
 
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setBounds(10,40,80,25);
         panel.add(passwordLabel);
 
-        passwordText = new JPasswordField();
-        passwordText.setBounds(100,40,165,25);
-        panel.add(passwordText);
+        passwordField = new JPasswordField();
+        passwordField.setBounds(100,40,165,25);
+        panel.add(passwordField);
 
         JButton button = new CustomButton("Submit");
         button.setBounds(10,75,100,25);
@@ -52,9 +52,9 @@ public class LoginUI extends JFrame {
         panel.add(success);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        String user = userText.getText();
-        String password = new String(passwordText.getPassword());
+    private void actionPerformed(ActionEvent e) {
+        String user = usernameField.getText();
+        String password = new String(passwordField.getPassword());
 
         if(AuthenticationFacade.getInstance().authenticate(user,password)){
             success.setText("Successful!");
@@ -62,8 +62,8 @@ public class LoginUI extends JFrame {
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    GUI.getInstance().closeLoginUI();
-                    GUI.getInstance().mainUI();
+                    GUIFacade.getInstance().closeLoginUI();
+                    GUIFacade.getInstance().mainUI();
                 }
             }, 1000);
 

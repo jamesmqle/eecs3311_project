@@ -1,7 +1,7 @@
 package Authentication;
 
 public class User {
-    String username = "";
+    private String username = "";
 
     public User(String username) {
         this.username = username;

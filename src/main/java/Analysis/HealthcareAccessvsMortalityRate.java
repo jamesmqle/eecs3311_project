@@ -1,7 +1,7 @@
 package Analysis;
 
 import DataFetcher.DataFetcherFacade;
-import GUI.GUI;
+import GUI.GUIFacade;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -11,10 +11,10 @@ import java.util.Collections;
 public class HealthcareAccessvsMortalityRate extends AnalysisStrategy {
     public HealthcareAccessvsMortalityRate() {
 
-        int fromYear = Integer.parseInt(GUI.getInstance().mainFrame.getFromYear());
+        int fromYear = Integer.parseInt(GUIFacade.getInstance().mainFrame.getFromYear());
 
-        DataFetcherFacade.getInstance().dateRange.setRange(Integer.toString(fromYear), GUI.getInstance().mainFrame.getToYear());
-        DataFetcherFacade.getInstance().country.setCountry(GUI.getInstance().mainFrame.getCountry());
+        DataFetcherFacade.getInstance().dateRange.setRange(Integer.toString(fromYear), GUIFacade.getInstance().mainFrame.getToYear());
+        DataFetcherFacade.getInstance().country.setCountry(GUIFacade.getInstance().mainFrame.getCountry());
 
         dataKeys.add("SH.ACS.MONY.Q1.ZS"); // Women's Health Care Access
         dataKeys.add("SP.DYN.IMRT.IN"); // Infant Mortality Rate

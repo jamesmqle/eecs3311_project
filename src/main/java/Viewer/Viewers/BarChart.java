@@ -1,8 +1,6 @@
 package Viewer.Viewers;
 
-import GUI.GUI;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import GUI.GUIFacade;
 import com.google.gson.JsonObject;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -14,7 +12,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class BarChart extends Viewer {
 
@@ -46,7 +43,7 @@ public class BarChart extends Viewer {
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(400, 300));
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        chartPanel.setBackground(GUI.getInstance().theme.getBorderColor());
+        chartPanel.setBackground(GUIFacade.getInstance().theme.getBorderColor());
 
         return chartPanel;
     }

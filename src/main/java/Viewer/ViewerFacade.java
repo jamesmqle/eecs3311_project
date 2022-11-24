@@ -1,9 +1,8 @@
 package Viewer;
 
-import GUI.GUI;
+import GUI.GUIFacade;
 import Viewer.Viewers.*;
 
-import javax.swing.*;
 import java.util.*;
 
 public class ViewerFacade {
@@ -53,7 +52,7 @@ public class ViewerFacade {
             refreshedViewer.add(false);
         }
 
-        GUI.getInstance().refreshMainUI();
+        GUIFacade.getInstance().refreshMainUI();
     }
 
 }

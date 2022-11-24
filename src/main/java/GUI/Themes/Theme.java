@@ -1,6 +1,6 @@
 package GUI.Themes;
 
-import GUI.GUI;
+import GUI.GUIFacade;
 import java.awt.*;
 
 public class Theme {
@@ -17,8 +17,8 @@ public class Theme {
 
     public void setTheme(Theme theme){
         currentTheme = theme;
-        if(GUI.getInstance() != null)
-            GUI.getInstance().rebuildMainUI();
+        if(GUIFacade.getInstance() != null)
+            GUIFacade.getInstance().rebuildMainUI();
     }
 
     public void toggleTheme() {

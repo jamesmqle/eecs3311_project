@@ -1,7 +1,7 @@
 package Analysis;
 
 import DataFetcher.DataFetcherFacade;
-import GUI.GUI;
+import GUI.GUIFacade;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -11,10 +11,10 @@ import java.util.Collections;
 public class AirPollutionvsForestArea extends AnalysisStrategy{
     public AirPollutionvsForestArea(){
 
-        int fromYear = Integer.parseInt(GUI.getInstance().mainFrame.getFromYear()) - 1;
+        int fromYear = Integer.parseInt(GUIFacade.getInstance().mainFrame.getFromYear()) - 1;
 
-        DataFetcherFacade.getInstance().dateRange.setRange(Integer.toString(fromYear), GUI.getInstance().mainFrame.getToYear());
-        DataFetcherFacade.getInstance().country.setCountry(GUI.getInstance().mainFrame.getCountry());
+        DataFetcherFacade.getInstance().dateRange.setRange(Integer.toString(fromYear), GUIFacade.getInstance().mainFrame.getToYear());
+        DataFetcherFacade.getInstance().country.setCountry(GUIFacade.getInstance().mainFrame.getCountry());
 
         dataKeys.add("EN.ATM.PM25.MC.M3"); // Air Pollution
         dataKeys.add("AG.LND.FRST.ZS"); // Forest Area

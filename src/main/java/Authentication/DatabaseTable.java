@@ -12,12 +12,11 @@ import java.util.Scanner;
 
 public class DatabaseTable {
 
-    String path;
+    private String path;
 
     public DatabaseTable(String path) {
         this.path = path;
     }
-
 
     public JsonObject[] getData() {
 
