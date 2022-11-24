@@ -31,6 +31,9 @@ public class AnalysisFacade {
             case "CO2vsEnergyUsevsAirPollution":
                 analysisStrategy = new CO2vsEnergyUsevsAirPollution();
                 break;
+            case "AirPollutionvsForestArea":
+                analysisStrategy = new AirPollutionvsForestArea();
+                break;
             case "CO2vsGDP":
                 analysisStrategy = new CO2vsGDP();
                 break;
@@ -42,6 +45,9 @@ public class AnalysisFacade {
                 break;
             case "CurrentHealthExpenditurevsHospitalBeds":
                 analysisStrategy = new CurrentHealthExpenditureVSHospitalBeds();
+                break;
+            case "HealthcareAccessvsMortalityRate":
+                analysisStrategy = new HealthcareAccessvsMortalityRate();
                 break;
             case "GovernmentExpenditureOnEducationvsCurrentHealthExpenditure":
                 analysisStrategy = new GovernmentExpenditureOnEducationVSCurrentHealthExpenditure();
