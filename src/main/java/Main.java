@@ -1,4 +1,6 @@
+import Authentication.AuthenticationFacade;
 import DataFetcher.DataFetcherFacade;
+import GUI.GUIFacade;
 
 public class Main {
 
@@ -6,9 +8,12 @@ public class Main {
 
         DataFetcherFacade.getInstance().setBaseURL("http://api.worldbank.org/v2");
 
-        DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL");
-        //DataFetcherFacade.getInstance().fetchData("AG.LND.AGRI.ZS");
+        // Open initial login UI
+        GUIFacade.getInstance().loginUI();
 
+        // Bypass login
+        // IMPORTANT: Comment out before pushing
+        // AuthenticationFacade.getInstance().authenticate("zach","1234");
+        // GUIFacade.getInstance().mainUI();
     }
-
 }
