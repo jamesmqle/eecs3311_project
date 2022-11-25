@@ -4,18 +4,24 @@ import Viewer.Viewers.*;
 
 public class ViewerFactory {
 
-
     public Viewer buildViewer(String type) {
 
-        return switch (type) {
-            case "BarChart" -> new BarChart();
-            case "LineChart" -> new LineChart();
-            case "ScatterChart" -> new ScatterChart();
-            case "Report" -> new Report();
-            case "PieChart" -> new PieChart();
-            case "TimeSeries" -> new TimeSeriesChart();
-            default -> null;
-        };
+        switch (type) {
+            case "BarChart":
+            	return new BarChart();
+            case "LineChart":
+            	return new LineChart();
+            case "ScatterChart":
+            	return new ScatterChart();
+            case "Report":
+            	return new Report();
+            case "PieChart":
+            	return new PieChart();
+            case "TimeSeries":
+            	return new TimeSeriesChart();
+            default:
+            	return null;
+        }
     }
 
 }
