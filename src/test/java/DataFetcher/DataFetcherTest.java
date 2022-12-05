@@ -47,4 +47,14 @@ public class DataFetcherTest {
         assertEquals(expected, data[0].toString());
     }
 
+    @Test
+    public void TestFetchData2() {
+        DataFetcherFacade.getInstance().dateRange.setRange("2020", "2020");
+        DataFetcherFacade.getInstance().country.setCountry("wdadwadadwa");
+
+        JsonObject[] data = DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL");
+
+        assertEquals(0, data.length);
+    }
+
 }
