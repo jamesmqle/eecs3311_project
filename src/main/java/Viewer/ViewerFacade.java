@@ -44,11 +44,11 @@ public class ViewerFacade {
     }
 
     public void refreshViewers() {
-        for (String viewerType: currentViewers.keySet()) {
-            currentViewers.get(viewerType).remove(false);
+        for (Map.Entry<String, Viewer> viewerEntry: currentViewers.entrySet()) {
+            viewerEntry.getValue().remove(false);
 
-            Viewer refreshedViewer = viewerFactory.buildViewer(viewerType);
-            currentViewers.put(viewerType, refreshedViewer);
+            Viewer refreshedViewer = viewerFactory.buildViewer(viewerEntry.getKey());
+            currentViewers.put(viewerEntry.getKey(), refreshedViewer);
             refreshedViewer.add(false);
         }
 

@@ -39,10 +39,10 @@ public class MainUI extends JFrame {
         ImageIcon iconImg = new ImageIcon(path);
         super.setIconImage(iconImg.getImage());
 
-        BuildUI();
+        buildUI();
     }
 
-    public void BuildUI() {
+    public void buildUI() {
 
         // Set top bar
         JLabel chooseCountryLabel = new JLabel("Choose a country: ");
@@ -213,10 +213,6 @@ public class MainUI extends JFrame {
             ViewerFacade.getInstance().addViewer(viewsList.getSelectedItem().toString());
         } else if (e.getSource() == removeViewBtn) {
             ViewerFacade.getInstance().removeViewer(viewsList.getSelectedItem().toString());
-        } else if (e.getSource() ==  fromList) {
-
-        } else if (e.getSource() ==  toList) {
-
         } else if (e.getSource() == themeSwitch) {
             GUIFacade.getInstance().theme.toggleTheme();
         }
