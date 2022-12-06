@@ -1,11 +1,12 @@
 package Authentication;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public class DatabaseTable {
 
         File file = new File(path);
         try{
-            Scanner input = new Scanner(file);
+            Scanner input = new Scanner(file, StandardCharsets.UTF_8);
 
             // Get keys of database table
             String[] keys = input.nextLine().split(",");
@@ -39,7 +40,7 @@ public class DatabaseTable {
 
                 data.add(obj);
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

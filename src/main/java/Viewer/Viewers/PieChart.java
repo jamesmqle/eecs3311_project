@@ -27,7 +27,6 @@ public class PieChart extends Viewer {
             }
         }
 
-        String fontName = javax.swing.UIManager.getDefaults().getFont("Label.font").getFontName();
         JFreeChart pieChart = ChartFactory.createMultiplePieChart(title, dataset, TableOrder.BY_COLUMN, true, true, true);
 
         ChartPanel chartPanel = new ChartPanel(pieChart);

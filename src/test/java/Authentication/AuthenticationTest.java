@@ -8,7 +8,7 @@ public class AuthenticationTest {
     @Test
     public void TestLoginSuccess(){
         assertTrue(AuthenticationFacade.getInstance().authenticate("zach", "1234"));
-        assertTrue(AuthenticationFacade.getInstance().authenticate("aiden", "abcd"));
+        assertTrue(AuthenticationFacade.getInstance().authenticate("aidan", "abcd"));
         assertTrue(AuthenticationFacade.getInstance().authenticate("james", "6666"));
         assertTrue(AuthenticationFacade.getInstance().authenticate("vishal", "5656"));
     }

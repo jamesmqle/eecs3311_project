@@ -3,6 +3,7 @@ package DataFetcher;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class DataRequester {
@@ -11,7 +12,7 @@ public class DataRequester {
 
     public String getHTTP (String urlString) {
         System.out.println("Requesting: " + urlString);
-        String data = "";
+        StringBuilder data = new StringBuilder();
 
         try {
             URL url = new URL(urlString);
@@ -21,9 +22,9 @@ public class DataRequester {
             int responseCode = conn.getResponseCode();
 
             if (responseCode == 200) {
-                Scanner sc = new Scanner(url.openStream());
+                Scanner sc = new Scanner(url.openStream(), StandardCharsets.UTF_8);
                 while (sc.hasNext()) {
-                    data += sc.nextLine();
+                    data.append(sc.nextLine());
                 }
                 sc.close();
             }
@@ -31,6 +32,6 @@ public class DataRequester {
             System.out.println(e);
         }
 
-        return data;
+        return data.toString();
     }
 }
