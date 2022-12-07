@@ -8,7 +8,7 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GUITest {
+public class MainGUITest {
 
     @BeforeAll
     public static void setUp() {
