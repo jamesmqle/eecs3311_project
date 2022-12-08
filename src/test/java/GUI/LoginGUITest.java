@@ -1,6 +1,8 @@
 package GUI;
 
 import Authentication.AuthenticationFacade;
+import GUI.GUIFacade;
+import GUI.LoginUI;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

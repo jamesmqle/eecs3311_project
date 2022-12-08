@@ -1,5 +1,7 @@
 package Analysis;
 
+import Analysis.AnalysisFacade;
+import Analysis.AnalysisStrategy;
 import DataFetcher.DataFetcherFacade;
 import GUI.GUIFacade;
 import com.google.gson.JsonObject;
