@@ -1,5 +1,7 @@
 package Analysis;
 
+import Analysis.AnalysisFacade;
+import Analysis.AnalysisStrategy;
 import DataFetcher.DataFetcherFacade;
 import GUI.GUIFacade;
 import com.google.gson.JsonObject;
@@ -21,8 +23,6 @@ public class AnalysisTest {
     public static void setUp() {
         DataFetcherFacade.getInstance().setBaseURL("http://api.worldbank.org/v2");
         GUIFacade.getInstance().mainUI();
-
-        //DecimalFormat df = new DecimalFormat("#.##");
     }
 
     @Test
