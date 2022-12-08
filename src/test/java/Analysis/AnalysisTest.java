@@ -23,8 +23,6 @@ public class AnalysisTest {
     public static void setUp() {
         DataFetcherFacade.getInstance().setBaseURL("http://api.worldbank.org/v2");
         GUIFacade.getInstance().mainUI();
-
-        //DecimalFormat df = new DecimalFormat("#.##");
     }
 
     @Test
