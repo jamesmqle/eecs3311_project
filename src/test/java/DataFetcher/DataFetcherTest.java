@@ -58,4 +58,11 @@ public class DataFetcherTest {
         assertEquals(0, data.length);
     }
 
+    @Test
+    public void TestFetchData3() {
+        JsonObject[] data = DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL");
+
+        assertEquals(0, data.length);
+    }
+
 }

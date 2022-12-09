@@ -4,6 +4,7 @@ import Analysis.AnalysisFacade;
 import Analysis.AnalysisStrategy;
 import DataFetcher.DataFetcherFacade;
 import GUI.GUIFacade;
+import Viewer.ViewerFacade;
 import com.google.gson.JsonObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,13 @@ public class AnalysisTest {
     public static void setUp() {
         DataFetcherFacade.getInstance().setBaseURL("http://api.worldbank.org/v2");
         GUIFacade.getInstance().mainUI();
+
+        ViewerFacade.getInstance().addViewer("BarChart");
+        ViewerFacade.getInstance().addViewer("LineChart");
+        ViewerFacade.getInstance().addViewer("ScatterChart");
+        ViewerFacade.getInstance().addViewer("PieChart");
+        ViewerFacade.getInstance().addViewer("TimeSeries");
+        ViewerFacade.getInstance().addViewer("Report");
     }
 
     @Test

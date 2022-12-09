@@ -55,4 +55,13 @@ public class ViewerFacade {
         GUIFacade.getInstance().refreshMainUI();
     }
 
+    public void clearViewers() {
+        for (Map.Entry<String, Viewer> viewerEntry: currentViewers.entrySet()) {
+            viewerEntry.getValue().remove(false);
+        }
+        currentViewers.clear();
+
+        GUIFacade.getInstance().refreshMainUI();
+    }
+
 }
