@@ -17,6 +17,12 @@ public class MainGUITest {
     }
 
     @Test
+    public void TestLoginUIDimensions(){
+        assertEquals(1250,GUIFacade.getInstance().mainFrame.getWidth());
+        assertEquals(800,GUIFacade.getInstance().mainFrame.getHeight());
+    }
+
+    @Test
     public void TestTheme1() {
         GUIFacade.getInstance().theme.setTheme(new DarkTheme());
 

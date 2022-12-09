@@ -72,6 +72,7 @@ public class ViewerTest {
 
     @Test
     public void TestAddViewer1() {
+        ViewerFacade.getInstance().clearViewers();
         ViewerFacade.getInstance().addViewer("BarChart");
 
         assertEquals(JPanel.class, GUIFacade.getInstance().mainFrame.viewerPanel.getComponents()[0].getClass());
@@ -79,6 +80,7 @@ public class ViewerTest {
 
     @Test
     public void TestAddViewer2() {
+        ViewerFacade.getInstance().clearViewers();
         ViewerFacade.getInstance().addViewer("LineChart");
         ViewerFacade.getInstance().addViewer("PieChart");
 
@@ -87,7 +89,19 @@ public class ViewerTest {
     }
 
     @Test
+    public void TestAddViewer3() {
+        ViewerFacade.getInstance().clearViewers();
+        ViewerFacade.getInstance().addViewer("BarChart");
+        ViewerFacade.getInstance().addViewer("BarChart");
+        ViewerFacade.getInstance().addViewer("BarChart");
+
+        assertEquals(JPanel.class, GUIFacade.getInstance().mainFrame.viewerPanel.getComponents()[0].getClass());
+        assertEquals(1, GUIFacade.getInstance().mainFrame.viewerPanel.getComponents().length);
+    }
+
+    @Test
     public void TestRemoveViewer1() {
+        ViewerFacade.getInstance().clearViewers();
         ViewerFacade.getInstance().addViewer("BarChart");
 
         assertEquals(1, GUIFacade.getInstance().mainFrame.viewerPanel.getComponents().length);
@@ -98,7 +112,22 @@ public class ViewerTest {
     }
 
     @Test
+    public void TestRemoveViewer2() {
+        ViewerFacade.getInstance().clearViewers();
+        ViewerFacade.getInstance().addViewer("BarChart");
+        ViewerFacade.getInstance().addViewer("LineChart");
+        ViewerFacade.getInstance().addViewer("PieChart");
+
+        assertEquals(3, GUIFacade.getInstance().mainFrame.viewerPanel.getComponents().length);
+
+        ViewerFacade.getInstance().removeViewer("BarChart");
+
+        assertEquals(2, GUIFacade.getInstance().mainFrame.viewerPanel.getComponents().length);
+    }
+
+    @Test
     public void TestRefreshViewers1() {
+        ViewerFacade.getInstance().clearViewers();
         ViewerFacade.getInstance().addViewer("BarChart");
         ViewerFacade.getInstance().addViewer("LineChart");
         ViewerFacade.getInstance().addViewer("PieChart");
