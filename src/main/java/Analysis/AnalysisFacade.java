@@ -55,6 +55,10 @@ public class AnalysisFacade {
         }
     }
 
+    public AnalysisStrategy getAnalysis(){
+        return analysisStrategy;
+    }
+    
     public void runAnalysis() {
         JsonObject[][] analyzedData = analysisStrategy.runAnalysis();
 

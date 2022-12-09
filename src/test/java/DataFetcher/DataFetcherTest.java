@@ -1,5 +1,6 @@
 package DataFetcher;
 
+import DataFetcher.DataFetcherFacade;
 import com.google.gson.JsonObject;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,6 +46,23 @@ public class DataFetcherTest {
         String expected = "{\"indicator\":{\"id\":\"SP.POP.TOTL\",\"value\":\"Population, total\"},\"country\":{\"id\":\"CA\",\"value\":\"Canada\"},\"countryiso3code\":\"CAN\",\"date\":\"2020\",\"value\":38037204,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0}";
 
         assertEquals(expected, data[0].toString());
+    }
+
+    @Test
+    public void TestFetchData2() {
+        DataFetcherFacade.getInstance().dateRange.setRange("2020", "2020");
+        DataFetcherFacade.getInstance().country.setCountry("wdadwadadwa");
+
+        JsonObject[] data = DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL");
+
+        assertEquals(0, data.length);
+    }
+
+    @Test
+    public void TestFetchData3() {
+        JsonObject[] data = DataFetcherFacade.getInstance().fetchData("SP.POP.TOTL");
+
+        assertEquals(0, data.length);
     }
 
 }

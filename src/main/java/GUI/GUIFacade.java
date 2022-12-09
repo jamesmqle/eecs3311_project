@@ -11,6 +11,7 @@ public class GUIFacade {
     public LoginUI loginFrame;
     public MainUI mainFrame;
 
+    //Singleton
     private static final GUIFacade gui = new GUIFacade();
     private GUIFacade() {
         theme.setTheme(new LightTheme());
@@ -49,7 +50,7 @@ public class GUIFacade {
 
     public void rebuildMainUI() {
         mainFrame.getContentPane().removeAll();
-        mainFrame.BuildUI();
+        mainFrame.buildUI();
 
         ViewerFacade.getInstance().refreshViewers();
 
